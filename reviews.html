@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gogo Rent - Dicono di noi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+    <style>
+        /* Variabili CSS (copiate da index.html per coerenza) */
+        :root {
+            --primary: #004080;
+            --accent: #ff7b00;
+            --bg: #f9f9f9;
+            --text: #222;
+            --white: #fff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --star-gold: #FFD700;
+            --star-grey: #ccc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 2rem 0;
+        }
+
+        /* Stili dell'header (uguali a index.html) */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--white);
+            margin-left: 1.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: text-decoration 0.3s ease;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Stili specifici della pagina recensioni */
+        .reviews-section {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .reviews-section h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-card p {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 1rem;
+            flex-grow: 1; /* Permette alla descrizione di espandersi */
+        }
+
+        .review-card .author {
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Stili per le stelle di valutazione (copiati da index.html) */
+        .star-rating {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .star {
+            width: 18px; /* Stelle leggermente più piccole nelle recensioni */
+            height: 18px;
+            fill: var(--star-gold);
+        }
+
+        .star.empty {
+            fill: var(--star-grey);
+        }
+
+        /* Stili del footer (uguali a index.html) */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 600px) {
+            nav a {
+                margin-left: 1rem;
+                font-size: 0.9rem;
+            }
+            .reviews-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Gogo Rent</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#catalogo">Catalogo</a>
+            <a href="info.html">Info</a>
+            <a href="reviews.html">Cosa dicono di noi</a>
+            <a href="#" id="contactNavLink">Contatti</a>
+        </nav>
+    </div>
+</header>
+
+<section class="reviews-section container">
+    <h2>Cosa dicono di noi</h2>
+    <div class="review-grid" id="reviewsGrid">
+        </div>
+</section>
+
+<footer>
+    <p>© 2025 Gogo Rent - Tutti i diritti riservati</p>
+</footer>
+
+<script>
+    // Dati di esempio per le recensioni
+    const reviews = [
+        {
+            id: 1,
+            author: "Luca Rossi",
+            rating: 5,
+            comment: "Esperienza di noleggio eccellente! La macchina era pulita e in perfette condizioni. Il personale è stato molto disponibile e cordiale. Noleggerò di nuovo da loro sicuramente!",
+        },
+        {
+            id: 2,
+            author: "Giulia Bianchi",
+            rating: 4,
+            comment: "Ho noleggiato uno scooter per una settimana. Ottimo mezzo, perfetto per girare in città. Piccolo ritardo al ritiro, ma nulla di grave. Consigliato!",
+        },
+        {
+            id: 3,
+            author: "Marco Verdi",
+            rating: 5,
+            comment: "Servizio impeccabile dall'inizio alla fine. Prezzi competitivi e vasta scelta di veicoli. Sono rimasto molto soddisfatto del noleggio della mia berlina.",
+        },
+        {
+            id: 4,
+            author: "Anna Neri",
+            rating: 4,
+            comment: "Ho avuto bisogno di un'auto all'ultimo minuto e Gogo Rent mi ha salvato! Processo di prenotazione facile e veloce. L'auto era leggermente datata ma funzionale.",
+        },
+        {
+            id: 5,
+            author: "Simone Gialli",
+            rating: 5,
+            comment: "I ragazzi di Gogo Rent sono stati super gentili e professionali. Mi hanno spiegato tutto in modo chiaro. Lo scooter era nuovo di zecca. Tornerò!",
+        },
+        {
+            id: 6,
+            author: "Elena Blu",
+            rating: 3,
+            comment: "Il veicolo era in buone condizioni, ma ho trovato la comunicazione un po' lenta tramite email. Meglio il contatto telefonico per urgenze.",
+        }
+    ];
+
+    const reviewsGrid = document.getElementById('reviewsGrid');
+
+    /**
+     * Genera il markup HTML per le stelle di valutazione.
+     * @param {number} rating - Il numero di stelle piene (da 0 a 5).
+     * @returns {string} - Il codice HTML delle stelle.
+     */
+    function generateStars(rating) {
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+            starsHtml += `
+                <svg class="star ${i <= rating ? '' : 'empty'}" viewBox="0 0 24 24">
+                    <path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/>
+                </svg>
+            `;
+        }
+        return starsHtml;
+    }
+
+    /**
+     * Visualizza le recensioni nella griglia.
+     */
+    function displayReviews() {
+        reviewsGrid.innerHTML = ''; // Pulisce la griglia esistente
+        reviews.forEach(review => {
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.innerHTML = `
+                <div class="star-rating" aria-label="Valutazione: ${review.rating} su 5 stelle">
+                    ${generateStars(review.rating)}
+                </div>
+                <p>"${review.comment}"</p>
+                <div class="author">- ${review.author}</div>
+            `;
+            reviewsGrid.appendChild(reviewCard);
+        });
+    }
+
+    // Funzione per gestire il link "Contatti" nella navbar (per la pagina recensioni)
+    document.getElementById('contactNavLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        // Poiché siamo su una pagina separata, useremo localStorage per comunicare a index.html
+        // che il modal di contatto deve essere aperto al caricamento.
+        localStorage.setItem('openContactModal', 'true');
+        window.location.href = 'index.html'; // Torna alla home page
+    });
+
+    // Inizializza la visualizzazione delle recensioni al caricamento della pagina
+    displayReviews();
+</script>
+
+</body>
+</html>
