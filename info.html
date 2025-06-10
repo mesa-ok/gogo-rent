@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informazioni - Chi siamo, Dove ci troviamo, Cosa facciamo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f4f8;
+      color: #1a1a1a;
+      line-height: 1.65;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      background: #004080;
+      color: white;
+      padding: 2rem 1rem;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 2.2rem;
+      letter-spacing: 1.2px;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      background: white;
+      color: #004080;
+      font-weight: 600;
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0, 75, 160, 0.15);
+      text-decoration: none;
+      transition: background 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background: #003366;
+      color: #fff;
+    }
+
+    main {
+      max-width: 900px;
+      width: 90%;
+      background: white;
+      border-radius: 12px;
+      padding: 2.5rem 3rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      margin-bottom: 3rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      position: relative;
+      padding-left: 3.5rem;
+    }
+
+    /* Icon placeholders (you can replace these with SVG or img) */
+    section::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      width: 2rem;
+      height: 2rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    section[aria-label="Chi siamo"]::before {
+      background-image: url('https://img.icons8.com/ios-filled/50/004080/about-us.png');
+    }
+    section[aria-label="Dove ci troviamo"]::before {
+      background-image: url('https://img.icons8.com/ios-filled/50/004080/marker.png');
+    }
+    section[aria-label="Cosa facciamo"]::before {
+      background-image: url('https://img.icons8.com/ios-filled/50/004080/settings.png');
+    }
+
+    h2 {
+      color: #004080;
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      main {
+        padding: 1.8rem 1.5rem;
+      }
+      section {
+        padding-left: 2.8rem;
+      }
+      section::before {
+        width: 1.5rem;
+        height: 1.5rem;
+        top: 0.2rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Informazioni sull'azienda</h1>
+    <nav>
+      <a href="index.html" aria-label="Torna alla pagina catalogo">← Torna al Catalogo</a>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-label="Chi siamo">
+      <h2>Chi siamo</h2>
+      <p>Siamo un'azienda specializzata nella vendita di veicoli selezionati con cura, dedicata a offrire ai nostri clienti qualità e assistenza personalizzata.</p>
+    </section>
+
+    <section aria-label="Dove ci troviamo">
+      <h2>Dove ci troviamo</h2>
+      <p>La nostra sede principale si trova a Milano, in Via Roma 123, facilmente raggiungibile e con ampio parcheggio.</p>
+    </section>
+
+    <section aria-label="Cosa facciamo">
+      <h2>Cosa facciamo</h2>
+      <p>Offriamo una vasta gamma di auto e scooter nuovi e usati, con servizi di consulenza, finanziamenti personalizzati e assistenza post-vendita.</p>
+    </section>
+  </main>
+
+</body>
+</html>

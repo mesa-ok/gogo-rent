@@ -1,0 +1,134 @@
+:root {
+  --primary: #003366;
+  --accent: #ff6b6b;
+  --bg: #f5f5f5;
+  --white: #ffffff;
+  --text: #333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+header {
+  background: var(--primary);
+  color: var(--white);
+  padding: 1rem 0;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 1rem;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  background: url('https://source.unsplash.com/1600x500/?car,rental') no-repeat center;
+  background-size: cover;
+  padding: 5rem 1rem;
+  color: var(--white);
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--white);
+  padding: 0.7rem 1.4rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.btn:hover {
+  background: #e24b4b;
+}
+
+.catalogo, .contatti {
+  padding: 4rem 1rem;
+}
+
+.card {
+  background: var(--white);
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card-info {
+  padding: 1.2rem;
+}
+
+.card-info h3 {
+  margin-bottom: 0.5rem;
+}
+
+.card-info ul {
+  padding-left: 1.2rem;
+  margin: 1rem 0;
+}
+
+.contatti form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contatti input,
+.contatti textarea {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contatti button {
+  background: var(--primary);
+  color: var(--white);
+  padding: 1rem;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .card-info ul {
+    padding-left: 1rem;
+  }
+
+  .hero h2 {
+    font-size: 1.6rem;
+  }
+}
