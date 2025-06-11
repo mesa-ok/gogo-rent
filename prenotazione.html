@@ -11,32 +11,33 @@
         :root {
             --primary: #004080; /* Blu scuro principale */
             --accent: #ff7b00;  /* Arancione brillante per accenti */
-            --bg: #f9f9f9;      /* Sfondo molto chiaro */
-            --text: #222;       /* Testo scuro per leggibilità */
+            --bg: #f8fbfd;      /* Sfondo molto chiaro e delicato */
+            --text: #333;       /* Testo scuro per leggibilità */
             --white: #fff;
-            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow: rgba(0, 0, 0, 0.07); /* Ombre ancora più leggere */
             --star-gold: #FFD700;
             --star-grey: #ccc;
             --gradient-underline: linear-gradient(to right, #ff7b00, #ffc107);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; }
-        .container { width: 90%; max-width: 1000px; margin: auto; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; /* Altezza linea leggermente ridotta */
+            scroll-behavior: smooth; }
+        .container { width: 88%; max-width: 900px; margin: auto; } /* Larghezza massima ulteriormente ridotta */
 
-        /* HEADER E NAVIGAZIONE (COPIATI DALLA TUA PAGINA PRINCIPALE) */
+        /* HEADER E NAVIGAZIONE */
         header {
             background: var(--primary);
             color: var(--white);
-            padding: 1rem 0;
-            box-shadow: 0 2px 8px var(--shadow);
+            padding: 0.7rem 0; /* Padding ulteriormente ridotto */
+            box-shadow: 0 2px 8px var(--shadow); /* Ombra ancora più leggera */
             position: sticky;
             top: 0;
             z-index: 100;
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
         header.scrolled {
-            background: rgba(0, 64, 128, 0.95);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+            background: rgba(0, 64, 128, 0.98);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* Ombra leggermente ridotta allo scroll */
         }
         header .container {
             display: flex;
@@ -45,14 +46,15 @@
             flex-wrap: wrap;
         }
         header h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* Dimensione ulteriormente ridotta */
             font-weight: 800;
-            margin-right: 1.5rem;
+            margin-right: 1.2rem; /* Spazio ulteriormente ridotto */
             flex-shrink: 0;
+            letter-spacing: -0.5px;
         }
         nav {
             display: flex;
-            gap: 1.8rem;
+            gap: 1.2rem; /* Spazio ulteriormente ridotto tra gli elementi */
             flex-wrap: wrap;
             justify-content: flex-end;
             flex-grow: 1;
@@ -61,272 +63,265 @@
             color: var(--white);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.05rem;
+            font-size: 0.95rem; /* Dimensione ulteriormente ridotta */
             position: relative;
-            padding-bottom: 7px;
+            padding-bottom: 6px; /* Spazio per l'underline */
             transition: color 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem; /* Spazio tra icona e testo */
             white-space: nowrap;
         }
         nav a::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 3px;
+            height: 2px; /* Altezza underline ridotta */
             background: var(--gradient-underline);
             left: 0;
             bottom: 0;
-            border-radius: 2px;
+            border-radius: 1px;
             transition: width 0.3s ease-out;
         }
         nav a:hover {
-            color: #f0f0f0;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+            color: var(--white);
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.3); /* Ombra testo più leggera */
         }
         nav a:hover::after {
             width: 100%;
         }
         nav a .fas {
-            font-size: 1.1rem;
+            font-size: 1rem; /* Icona ulteriormente ridotta */
             color: inherit;
             transition: color 0.3s ease;
         }
         nav a:hover .fas {
-             color: #f0f0f0; 
+            color: var(--white);
         }
 
         /* MEDIA QUERIES PER HEADER E NAVIGAZIONE */
         @media (max-width: 768px) {
             header .container { flex-direction: column; align-items: center; }
-            header h1 { margin-bottom: 1rem; margin-right: 0; }
-            nav { width: 100%; justify-content: center; gap: 1rem; }
-            nav a { font-size: 0.95rem; padding: 0 0.5rem 5px; gap: 0.3rem; }
+            header h1 { margin-bottom: 0.7rem; margin-right: 0; font-size: 1.4rem; }
+            nav { width: 100%; justify-content: center; gap: 0.7rem; }
+            nav a { font-size: 0.85rem; padding: 0 0.5rem 4px; gap: 0.2rem; }
         }
         @media (max-width: 480px) {
-            nav { flex-direction: column; gap: 0.8rem; }
-            nav a { padding: 0.2rem 0; justify-content: center; }
+            nav { flex-direction: column; gap: 0.5rem; }
+            nav a { padding: 0.3rem 0; justify-content: center; }
         }
 
         /* STILI SPECIFICI PER LA PAGINA DI PRENOTAZIONE */
         .booking-section {
-            background: linear-gradient(135deg, #e0f2f7, #c1e4ee); /* Sfondo delicato */
-            padding: 3rem 0;
+            background: linear-gradient(135deg, #e0f2f7, #c1e4ee);
+            padding: 2.5rem 0; /* Padding ulteriormente ridotto */
             text-align: center;
-            box-shadow: inset 0 5px 15px rgba(0,0,0,0.05);
-            min-height: calc(100vh - 150px); /* Assicura un'altezza minima per la pagina */
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+            min-height: calc(100vh - 100px); /* Altezza minima ulteriormente ridotta */
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
         }
         .booking-section h2 {
-            font-size: 2.2rem;
+            font-size: 2.1rem; /* Titolo ulteriormente ridotto */
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.5rem; /* Spazio ulteriormente ridotto */
             font-weight: 800;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Ombra più leggera */
         }
         .booking-form {
             background: var(--white);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
+            padding: 1.8rem; /* Padding ulteriormente ridotto */
+            border-radius: 12px; /* Bordi ulteriormente meno arrotondati */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Ombra ulteriormente più leggera */
+            max-width: 600px; /* Larghezza massima ulteriormente ridotta */
+            margin: 0 auto 1.8rem; /* Margine ulteriormente ridotto */
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1.2rem; /* Spazio ulteriormente ridotto tra gli elementi del form */
             justify-content: center;
             align-items: flex-end;
-            border: 1px solid #ddd;
+            border: 1px solid #e5e5e5; /* Bordo più leggero */
         }
         .form-group {
-            flex: 1 1 calc(50% - 1.5rem); /* Due colonne su schermi grandi */
-            min-width: 250px; /* Larghezza minima per evitare che si schiacci */
+            flex: 1 1 calc(50% - 1.2rem); /* Adattato al gap ulteriormente ridotto */
+            min-width: 200px; /* Larghezza minima ulteriormente ridotta */
             text-align: left;
         }
         .form-group label {
             display: block;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem; /* Spazio ulteriormente ridotto */
             font-weight: 700;
             color: var(--primary);
-            font-size: 1rem;
+            font-size: 0.95rem; /* Dimensione label ulteriormente ridotta */
         }
         .form-group input[type="date"] {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            padding: 0.7rem 0.9rem; /* Padding ulteriormente ridotto */
+            border: 1px solid #ccc; /* Bordo leggermente più chiaro */
+            border-radius: 7px; /* Bordi ulteriormente meno arrotondati */
+            font-size: 0.95rem; /* Dimensione testo input ulteriormente ridotta */
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.03); /* Ombra interna ulteriormente più leggera */
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            appearance: none; /* Rimuove lo stile predefinito per la data */
+            appearance: none;
             -webkit-appearance: none;
             cursor: pointer;
         }
         .form-group input[type="date"]:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(255, 123, 0, 0.3);
+            box-shadow: 0 0 0 2px rgba(255, 123, 0, 0.25); /* Ombra focus ulteriormente ridotta */
             outline: none;
         }
         .booking-form button {
             background: var(--accent);
             color: var(--white);
-            padding: 0.9rem 2.5rem;
+            padding: 0.8rem 2.2rem; /* Padding ulteriormente ridotto */
             border: none;
-            border-radius: 8px;
+            border-radius: 7px; /* Bordi ulteriormente meno arrotondati */
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Dimensione testo bottone ulteriormente ridotta */
             cursor: pointer;
             transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 123, 0, 0.4);
-            flex-shrink: 0; /* Non si rimpicciolisce */
-            margin-top: 1rem; /* Spazio per allineamento */
+            box-shadow: 0 3px 12px rgba(255, 123, 0, 0.3); /* Ombra bottone ulteriormente ridotta */
+            flex-shrink: 0;
+            margin-top: 0.7rem;
         }
         .booking-form button:hover {
             background: #e66b00;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 123, 0, 0.5);
+            transform: translateY(-1px); /* Effetto hover più leggero */
+            box-shadow: 0 4px 15px rgba(255, 123, 0, 0.4); /* Ombra hover ulteriormente più leggera */
         }
 
         #availableVehiclesDisplay {
-            margin-top: 2rem;
+            margin-top: 2rem; /* Spazio ulteriormente ridotto */
             text-align: left;
         }
         #availableVehiclesDisplay h3 {
-            font-size: 1.8rem;
+            font-size: 1.8rem; /* Titolo ulteriormente ridotto */
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem; /* Spazio ulteriormente ridotto */
             font-weight: 700;
             text-align: center;
         }
         #availableVehiclesDisplay .grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Potrebbero essere un po' più stretti qui */
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Dimensioni card ulteriormente ridotte */
+            gap: 1.5rem; /* Gap ulteriormente ridotto tra le card */
         }
         #availableVehiclesDisplay .card {
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.08); /* Ombra card ulteriormente più leggera */
         }
         #availableVehiclesDisplay .card .price {
-            font-size: 1.2rem;
+            font-size: 1.15rem; /* Prezzo ulteriormente ridotto */
             color: var(--primary);
             font-weight: 800;
-            margin-top: 0.5rem;
+            margin-top: 0.5rem; /* Spazio ulteriormente ridotto */
         }
         .no-vehicles-message {
             text-align: center;
-            font-size: 1.2rem;
-            color: #555;
-            padding: 2rem;
+            font-size: 1rem; /* Dimensione testo ulteriormente ridotta */
+            color: #666;
+            padding: 1.8rem; /* Padding ulteriormente ridotto */
             background: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); /* Ombra messaggio ulteriormente più leggera */
             margin-top: 2rem;
+            border: 1px solid #ddd;
         }
 
         /* CARD (necessarie per la visualizzazione dei veicoli disponibili) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 16px var(--shadow); padding-bottom: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; cursor: pointer; position: relative; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px var(--shadow); }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 2px solid var(--accent); }
-        .card h3 { margin: 1rem 1rem 0.3rem; font-weight: 700; color: var(--primary); }
-        .price { margin: 0 1rem 0.5rem; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
-        .card ul { margin: 0 1.5rem 1rem; list-style: none; padding: 0; font-size: 0.95rem; color: #555; flex-grow: 1; }
-        .star-rating { margin: 0 1rem 0.5rem; display: flex; align-items: center; gap: 2px; }
-        .star { width: 20px; height: 20px; fill: var(--star-gold); }
-        .star.empty { fill: var(--star-grey); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; } /* Grid con gap ulteriormente ridotto */
+        .card { background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 7px 18px var(--shadow); padding-bottom: 1rem; /* Padding ulteriormente ridotto */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; cursor: pointer; position: relative; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1); } /* Effetto hover più leggero */
+        .card img { width: 100%; height: 160px; /* Altezza immagine ulteriormente ridotta */
+            object-fit: cover; border-bottom: 1px solid var(--accent); } /* Bordo immagine ancora più sottile */
+        .card h3 { margin: 0.9rem 0.9rem 0.25rem; font-weight: 700; color: var(--primary); font-size: 1.2rem; } /* Titolo card ulteriormente ridotto */
+        .price { margin: 0 0.9rem 0.4rem; font-weight: 700; color: var(--accent); font-size: 1rem; } /* Prezzo card ulteriormente ridotto */
+        .card ul { margin: 0 1.2rem 0.8rem; list-style: none; padding: 0; font-size: 0.9rem; color: #555; flex-grow: 1; }
+        .star-rating { margin: 0 0.9rem 0.4rem; display: flex; align-items: center; gap: 1px; } /* Spazio tra le stelle ulteriormente ridotto */
+        .star { width: 18px; height: 18px; fill: var(--star-gold); } /* Stelle ulteriormente più piccole */
 
-        /* FOOTER (COPIATO DALLA TUA PAGINA PRINCIPALE) */
-        footer { background: var(--primary); color: var(--white); text-align: center; padding: 2rem 1rem; margin-top: 3rem; }
+        /* FOOTER */
+        footer { background: var(--primary); color: var(--white); text-align: center; padding: 1.8rem 1rem; margin-top: 2rem; /* Margine ulteriormente ridotto */
+            font-size: 0.85rem; /* Testo footer ulteriormente più piccolo */ }
 
-        /* MODALI (COPIATE DALLA TUA PAGINA PRINCIPALE) */
-        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 1rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        /* MODALI */
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); /* Sfondo modale ancora più leggero */
+            display: none; justify-content: center; align-items: center; z-index: 1000; padding: 0.8rem; /* Padding ulteriormente ridotto */
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal.active { display: flex; opacity: 1; visibility: visible; }
         .modal-content { 
             background: var(--white); 
-            border-radius: 16px; 
-            max-width: 320px; 
+            border-radius: 12px; /* Bordi ulteriormente meno arrotondati */
+            max-width: 300px; /* Larghezza massima ulteriormente ridotta */
             width: 100%; 
-            padding: 1rem; 
-            box-shadow: 0 8px 20px var(--shadow); 
+            padding: 1.2rem; /* Padding ulteriormente ridotto */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Ombra ulteriormente più leggera */
             position: relative; 
             text-align: center; 
-            transform: translateY(20px); 
-            transition: transform 0.3s ease, opacity 0.3s ease; 
+            transform: translateY(15px); /* Effetto entrata più leggero */
+            transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .modal.active .modal-content { transform: translateY(0); }
         .modal-content img#modalImg { 
             width: 100%; 
-            height: 200px; 
+            height: 150px; /* Altezza immagine ulteriormente ridotta */
             object-fit: cover; 
-            border-radius: 12px; 
-            margin-bottom: 1rem; 
+            border-radius: 10px; /* Bordi arrotondati per l'immagine */
+            margin-bottom: 0.8rem; 
+            border: 1px solid #eee;
         }
-        .modal-content h3 { margin-bottom: 0.5rem; color: var(--primary); font-weight: 700; }
-        .modal-content ul { list-style: none; padding: 0; margin: 1rem 0; color: #444; text-align: left; }
+        .modal-content h3 { margin-bottom: 0.5rem; color: var(--primary); font-weight: 700; font-size: 1.4rem; } /* Titolo modale ulteriormente ridotto */
+        .modal-content ul { list-style: none; padding: 0; margin: 0.8rem 0; color: #444; text-align: left; }
         .modal-content ul li { 
-            margin-bottom: 0.7rem; 
-            font-size: 0.9rem; 
+            margin-bottom: 0.6rem; 
+            font-size: 0.85rem; /* Dimensione testo lista ulteriormente ridotta */
+            line-height: 1.3;
         }
-        .modal-content .modal-price { font-size: 1.5rem; color: var(--primary); font-weight: 800; margin-top: 1rem; }
-        .modal-content .btn-info-whatsapp { background: var(--primary); color: var(--white); padding: 0.85rem 1.5rem; border-radius: 8px; font-weight: 600; border: none; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 1.5rem; width: calc(100% - 2rem); max-width: 300px; }
-        .modal-content .btn-info-whatsapp:hover { background: #003366; transform: translateY(-2px); }
-        .close-btn { position: absolute; top: 12px; right: 12px; background: var(--accent); color: var(--white); border: none; border-radius: 50%; width: 28px; height: 28px; font-weight: 700; font-size: 1.2rem; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease; }
-        .close-btn:hover { background: #e66b00; }
+        .modal-content .modal-price { font-size: 1.3rem; color: var(--primary); font-weight: 800; margin-top: 1rem; } /* Prezzo modale ulteriormente ridotto */
+        .modal-content .btn-info-whatsapp { background: var(--primary); color: var(--white); padding: 0.7rem 1.5rem; border-radius: 7px; font-weight: 600; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 1.2rem; width: calc(100% - 1.5rem); max-width: 280px; font-size: 0.95rem; } /* Stile bottone WhatsApp ulteriormente ridotto */
+        .modal-content .btn-info-whatsapp:hover { background: #003366; transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+        .close-btn { position: absolute; top: 10px; right: 10px; background: var(--accent); color: var(--white); border: none; border-radius: 50%; width: 24px; height: 24px; font-weight: 700; font-size: 1rem; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: background 0.3s ease, transform 0.2s ease; }
+        .close-btn:hover { background: #e66b00; transform: rotate(90deg); }
 
-        .thumbnail-gallery { display: flex; justify-content: center; gap: 0.7rem; margin-top: 0.7rem; flex-wrap: wrap; }
-        .thumbnail-gallery img { width: 60px; height: 40px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.2s ease; }
-        .thumbnail-gallery img.active { border-color: var(--accent); transform: scale(1.05); }
-        .thumbnail-gallery img:hover { border-color: var(--primary); transform: scale(1.03); }
+        .thumbnail-gallery { display: flex; justify-content: center; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap; } /* Spazio ulteriormente ridotto tra le miniature */
+        .thumbnail-gallery img { width: 50px; height: 35px; object-fit: cover; border-radius: 7px; cursor: pointer; border: 1px solid transparent; transition: border-color 0.3s ease, transform 0.2s ease; } /* Miniature ulteriormente più piccole */
+        .thumbnail-gallery img.active { border-color: var(--accent); transform: scale(1.03); }
+        .thumbnail-gallery img:hover { border-color: var(--primary); transform: scale(1.02); }
 
-        #contactModal .modal-content { text-align: center; }
-        #contactModal h3 { margin-bottom: 1rem; color: var(--primary); font-weight: 700; }
-        #contactModal p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; }
-        #contactModal .phone-number { font-size: 1.6rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem; display: block; text-decoration: none; transition: color 0.3s ease; }
-        #contactModal .phone-number:hover { color: var(--accent); }
-        #contactModal .modal-buttons { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1.5rem; }
-        #contactModal .modal-buttons .btn { width: 100%; padding: 0.85rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 8px; transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease; text-decoration: none; display: inline-block; cursor: pointer; }
-        #contactModal .modal-buttons .btn-primary { background: var(--primary); color: var(--white); border: none; }
-        #contactModal .modal-buttons .btn-primary:hover { background: #003366; transform: translateY(-2px); }
-        #contactModal .modal-buttons .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
-        #contactModal .modal-buttons .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); border-color: var(--primary); }
-        #contactModal .modal-buttons .btn-whatsapp { background: #25D366; color: var(--white); border: none; }
-        #contactModal .modal-buttons .btn-whatsapp:hover { background: #1DA851; transform: translateY(-2px); }
-
-        .faq-section { margin-top: 1.5rem; text-align: left; border-top: 1px solid #eee; padding-top: 1.5rem; }
-        .faq-section h4 { color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem; text-align: center; }
-        .faq-item { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 0.8rem; overflow: hidden; background: var(--white); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .faq-question { background: #f0f8ff; padding: 0.8rem 1rem; cursor: pointer; font-weight: 600; color: var(--primary); display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }
-        .faq-question:hover { background: #e0f0ff; }
-        .faq-question .arrow { font-size: 1.2rem; transition: transform 0.3s ease; }
-        .faq-question.active .arrow { transform: rotate(90deg); }
-        .faq-answer { padding: 0 1rem; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; color: #555; font-size: 0.95rem; }
-        .faq-answer p { padding-bottom: 0.8rem; }
-        .faq-answer.active { max-height: 200px; padding: 0.8rem 1rem; }
-
+        /* Media Queries generiche per le modali */
         @media (min-width: 600px) {
-            #contactModal .modal-buttons { flex-direction: row; justify-content: center; }
-            #contactModal .modal-buttons .btn { width: auto; min-width: 180px; }
-            .modal-content { max-width: 480px; padding: 1.5rem; }
-            .modal-content img#modalImg { height: 260px; }
-            .modal-content ul li { font-size: 1rem; }
+            .modal-content { max-width: 400px; padding: 1.5rem; } /* Larghezza modale su desktop */
+            .modal-content img#modalImg { height: 180px; } /* Altezza immagine modale su desktop */
+            .modal-content ul li { font-size: 0.95rem; }
         }
         @media (max-width: 600px) {
-            .hero { padding: 1.5rem 1rem; min-height: 180px; }
-            .hero h2 { font-size: 1.8rem; }
-            .hero p { font-size: 1rem; }
+            .booking-section { padding: 1.8rem 0; }
+            .booking-section h2 { font-size: 1.7rem; margin-bottom: 1rem; }
+            .booking-form { padding: 1.2rem; gap: 0.8rem; }
+            .form-group { flex: 1 1 100%; min-width: unset; }
+            .form-group input[type="date"] { padding: 0.6rem 0.7rem; font-size: 0.9rem; }
+            .booking-form button { padding: 0.6rem 1.8rem; font-size: 0.9rem; }
+            #availableVehiclesDisplay h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+            .no-vehicles-message { font-size: 0.9rem; padding: 1.2rem; }
             .grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 700px) {
-            .booking-form {
-                padding: 1.5rem;
-                gap: 1rem;
-            }
-            .form-group {
-                flex: 1 1 100%; /* Una colonna su schermi piccoli */
-                min-width: unset;
-            }
+            .card { border-radius: 8px; padding-bottom: 0.7rem; }
+            .card img { height: 140px; }
+            .card h3 { font-size: 1.1rem; margin: 0.7rem 0.7rem 0.2rem; }
+            .price { font-size: 0.9rem; margin: 0 0.7rem 0.3rem; }
+            .card ul { margin: 0 1rem 0.5rem; font-size: 0.85rem; }
+            .star { width: 14px; height: 14px; }
+
+            .modal-content { max-width: 90%; padding: 0.8rem; }
+            .modal-content img#modalImg { height: 140px; margin-bottom: 0.6rem; }
+            .modal-content h3 { font-size: 1.3rem; }
+            .modal-content ul { margin: 0.5rem 0; }
+            .modal-content ul li { font-size: 0.8rem; margin-bottom: 0.4rem; }
+            .modal-content .modal-price { font-size: 1.1rem; margin-top: 0.8rem; }
+            .modal-content .btn-info-whatsapp { padding: 0.6rem 1rem; font-size: 0.85rem; margin-top: 1rem; }
+            .close-btn { width: 22px; height: 22px; font-size: 0.9rem; }
+            .thumbnail-gallery img { width: 45px; height: 30px; }
         }
     </style>
 </head>
@@ -336,11 +331,7 @@
     <div class="container">
         <h1>Gogo Rent</h1>
         <nav>
-            <a href="info.html"><i class="fas fa-info-circle"></i> Info</a>
             <a href="index.html"><i class="fas fa-home"></i> Home</a> 
-            <a href="index.html#catalogo"><i class="fas fa-car"></i> Catalogo</a> 
-            <a href="reviews.html"><i class="fas fa-star"></i> Cosa dicono di noi</a> 
-            <a href="#" id="contactNavLink"><i class="fas fa-headset"></i> Contatti</a>
         </nav>
     </div>
 </header>
@@ -362,7 +353,7 @@
             </form>
 
             <div id="availableVehiclesDisplay">
-                </div>
+            </div>
         </div>
     </section>
 </main>
@@ -381,41 +372,6 @@
         <div class="star-rating" id="modalRating"></div>
         <p class="modal-price" id="modalCalculatedPrice"></p>
         <a href="#" id="infoWhatsappBtn" class="btn-info-whatsapp" target="_blank">Altre Info (WhatsApp)</a>
-    </div>
-</div>
-
-<div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" aria-describedby="contactModalDesc">
-    <div class="modal-content">
-        <button class="close-btn" aria-label="Chiudi">&times;</button>
-        <h3 id="contactModalTitle">Contattaci per Prenotare!</h3>
-        <p id="contactModalDesc">Siamo qui per aiutarti. Contattaci tramite WhatsApp per domande o prenotazioni.</p>
-        
-        <a href="tel:+393517223520" class="phone-number">📞 +39 3517223520</a> 
-
-        <div class="faq-section">
-            <h4>Domande Frequenti</h4>
-            <div class="faq-item">
-                <div class="faq-question">Quali documenti servono?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>Patente, documento d'identità e carta di credito (per cauzione).</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Età minima per noleggiare?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>21 anni per scooter, 23 per auto.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Posso riconsegnare in ritardo?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>Rispettare l'orario; avvisare in caso di imprevisti per evitare costi extra.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Cauzione, come funziona?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>Bloccata su carta di credito al ritiro; sbloccata a fine noleggio, verificando le condizioni.</p></div>
-            </div>
-        </div>
-
-        <div class="modal-buttons">
-            <a href="https://wa.me/393517223520?text=Ciao%2C%20vorrei%20fare%20una%20domanda%20generica%20sui%20vostri%20servizi." class="btn btn-secondary btn-whatsapp" target="_blank">Fai una domanda (WhatsApp)</a>
-            <a href="#" id="bookNowWhatsappBtn" class="btn btn-primary btn-whatsapp" target="_blank">Prenota Ora (WhatsApp)</a>
-        </div>
     </div>
 </div>
 
@@ -441,12 +397,7 @@
     const modalRating = document.getElementById('modalRating');
     const modalCalculatedPrice = document.getElementById('modalCalculatedPrice');
     const infoWhatsappBtn = document.getElementById('infoWhatsappBtn'); 
-    const contactNavLink = document.getElementById('contactNavLink'); 
-    const contactModal = document.getElementById('contactModal');
-    const closeContactModalBtn = contactModal.querySelector('.close-btn');
-    const bookNowWhatsappBtn = document.getElementById('bookNowWhatsappBtn'); 
-    const phoneNumber = '393517223520'; // Il tuo numero di telefono per WhatsApp
-
+    
     const bookingForm = document.getElementById('bookingForm');
     const pickupDateInput = document.getElementById('pickupDate');
     const returnDateInput = document.getElementById('returnDate');
@@ -490,10 +441,11 @@
 
         for (const bookedDateStr of vehicle.bookedDates) {
             const bookedDate = new Date(bookedDateStr);
+            // Assumiamo che una data prenotata significhi che l'intero giorno è non disponibile
             const bookedStartTime = bookedDate.getTime();
             const bookedEndTime = bookedDate.getTime(); 
 
-            // Controlla se c'è sovrapposizione
+            // Controlla se c'è sovrapposizione tra l'intervallo richiesto e la data prenotata
             if (
                 (requestedStart <= bookedEndTime && requestedEnd >= bookedStartTime)
             ) {
@@ -535,7 +487,7 @@
             card.setAttribute('role', 'button');
             card.setAttribute('aria-label', `${vehicle.name}, clicca per dettagli e prenotazione`);
 
-            const totalPrice = (vehicle.dailyRate * daysDiff).toLocaleString('it-IT');
+            const totalPrice = (vehicle.dailyRate * daysDiff).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
             card.innerHTML = `
                 <img src="${vehicle.images[0]}" alt="${vehicle.name}" />
@@ -555,14 +507,20 @@
                 openVehicleModal(vehicle); 
                 document.getElementById('modalCalculatedPrice').textContent = `Costo stimato per ${daysDiff} giorni: €${totalPrice}`;
                 
-                const whatsappMessage = encodeURIComponent(`Ciao, vorrei prenotare ${vehicle.name} dal ${pickupDateInput.value} al ${returnDateInput.value}. Costo stimato: €${totalPrice}.`);
+                const phoneNumber = '393517223520';
+                const pickupDateFormatted = pickupDateInput.value.split('-').reverse().join('/');
+                const returnDateFormatted = returnDateInput.value.split('-').reverse().join('/');
+                const whatsappMessage = encodeURIComponent(`Ciao, vorrei prenotare ${vehicle.name} dal ${pickupDateFormatted} al ${returnDateFormatted}. Costo stimato: €${totalPrice}.`);
                 document.getElementById('infoWhatsappBtn').href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
             });
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     openVehicleModal(vehicle);
                     document.getElementById('modalCalculatedPrice').textContent = `Costo stimato per ${daysDiff} giorni: €${totalPrice}`;
-                     const whatsappMessage = encodeURIComponent(`Ciao, vorrei prenotare ${vehicle.name} dal ${pickupDateInput.value} al ${returnDateInput.value}. Costo stimato: €${totalPrice}.`);
+                    const phoneNumber = '393517223520';
+                    const pickupDateFormatted = pickupDateInput.value.split('-').reverse().join('/');
+                    const returnDateFormatted = returnDateInput.value.split('-').reverse().join('/');
+                    const whatsappMessage = encodeURIComponent(`Ciao, vorrei prenotare ${vehicle.name} dal ${pickupDateFormatted} al ${returnDateFormatted}. Costo stimato: €${totalPrice}.`);
                     document.getElementById('infoWhatsappBtn').href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
                 }
             });
@@ -582,7 +540,9 @@
             <li><strong>Anno:</strong> ${vehicle.year}</li>
         `;
         modalRating.innerHTML = generateStars(vehicle.rating);
-        modalCalculatedPrice.textContent = `Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}`; 
+        if (!pickupDateInput.value || !returnDateInput.value) {
+            modalCalculatedPrice.textContent = `Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`; 
+        }
 
         thumbnailGallery.innerHTML = '';
         vehicle.images.forEach((image, index) => {
@@ -599,11 +559,18 @@
             thumbnailGallery.appendChild(thumb);
         });
 
-        // Prepara il messaggio WhatsApp per la richiesta di info generiche (se le date non sono state selezionate)
+        const phoneNumber = '393517223520';
+        let whatsappMessage;
         if (!pickupDateInput.value || !returnDateInput.value) { 
-            const whatsappMessage = encodeURIComponent(`Ciao, vorrei info su ${vehicle.name} (ID: ${vehicle.id}).`);
-            infoWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+            whatsappMessage = encodeURIComponent(`Ciao, vorrei info su ${vehicle.name} (ID: ${vehicle.id}).`);
+        } else {
+            const daysDiff = Math.ceil((new Date(returnDateInput.value).getTime() - new Date(pickupDateInput.value).getTime()) / (1000 * 3600 * 24)) + 1;
+            const totalPrice = (vehicle.dailyRate * daysDiff).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const pickupDateFormatted = pickupDateInput.value.split('-').reverse().join('/');
+            const returnDateFormatted = returnDateInput.value.split('-').reverse().join('/');
+            whatsappMessage = encodeURIComponent(`Ciao, vorrei prenotare ${vehicle.name} dal ${pickupDateFormatted} al ${returnDateFormatted}. Costo stimato: €${totalPrice}.`);
         }
+        infoWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
         
         vehicleModal.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -615,51 +582,31 @@
     }
 
     closeVehicleModalBtn.addEventListener('click', () => closeModal(vehicleModal));
-    closeContactModalBtn.addEventListener('click', () => closeModal(contactModal));
 
-    vehicleModal.addEventListener('click', (e) => { if (e.target === vehicleModal) closeModal(vehicleModal); });
-    contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeModal(contactModal); });
-
-    contactNavLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        contactModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+    vehicleModal.addEventListener('click', (e) => {
+        if (e.target === vehicleModal) {
+            closeModal(vehicleModal);
+        }
     });
 
-    // Link "Prenota Ora (WhatsApp)" nel modal contatti
-    bookNowWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=Ciao%2C%20vorrei%20procedere%20con%20una%20prenotazione.`;
-
-    // Funzionalità FAQ nel modal contatti
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            faqQuestions.forEach(otherQuestion => {
-                if (otherQuestion !== question && otherQuestion.classList.contains('active')) {
-                    otherQuestion.classList.remove('active');
-                    otherQuestion.nextElementSibling.classList.remove('active');
-                }
-            });
-            question.classList.toggle('active');
-            answer.classList.toggle('active');
-        });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (vehicleModal.classList.contains('active')) {
+                closeModal(vehicleModal);
+            }
+        }
     });
 
-    // Effetto scroll per l'header (se lo hai anche nella tua index.html)
+    // Gestione dello scroll per l'header
     window.addEventListener('scroll', () => {
         const header = document.querySelector('header');
-        if (window.scrollY > 50) { 
+        if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
     });
 
-    // Inizializzazione date input
-    document.addEventListener('DOMContentLoaded', () => {
-        pickupDateInput.min = todayISO;
-        returnDateInput.min = pickupDateInput.value || todayISO;
-    });
 </script>
 
 </body>

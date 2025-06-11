@@ -2,112 +2,726 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gogo Rent - Catalogo Veicoli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gogo Rent - Noleggio Veicoli e Recensioni</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23004080' d='M20 10c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zM4 10c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm16-4h-4v4h4v-4zm-4 10h4v4h-4v-4zm-12 0h4v4h-4v-4zm0-10h4v4h-4v-4zM16 12c0 2.208-1.792 4-4 4s-4-1.792-4-4 1.792-4 4-4 4 1.792 4 4zM12 10c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z'/%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujlZH0l0ZfL7F1m1N7qA2g3D1Z9y0W4t7b6U2M00y1n7h1L7b6U2Z8M7c0Y8X9b/7Z5/9Z9N4aQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
+        /* --- CSS INIZIA QUI --- */
+
+        /* Definizione delle variabili CSS per colori e stili principali */
         :root {
-            --primary: #004080; /* Blu scuro principale */
-            --accent: #ff7b00;  /* Arancione brillante per accenti */
-            --bg: #f9f9f9;      /* Sfondo molto chiaro */
-            --text: #222;       /* Testo scuro per leggibilità */
-            --white: #fff;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --star-gold: #FFD700;
-            --star-grey: #ccc;
-            /* Gradiente per la sottolineatura (NUOVO STILE) */
-            --gradient-underline: linear-gradient(to right, #ff7b00, #ffc107); /* Arancione a Giallo */
+            --primary: #004080;        /* Blu scuro principale, pulito e professionale */
+            --accent: #ff7b00;         /* Arancione brillante, per call to action e dettagli */
+            --bg: #f9f9f9;             /* Sfondo molto chiaro, quasi bianco */
+            --text: #222;              /* Testo scuro per un'ottima leggibilità */
+            --white: #fff;             /* Colore bianco */
+            --shadow: rgba(0, 0, 0, 0.1); /* Ombra leggera per profondità */
+            --star-gold: #FFD700;     /* Colore oro per le stelle piene */
+            --star-grey: #ccc;         /* Colore grigio per le stelle vuote */
+            --gradient-underline: linear-gradient(to right, #ff7b00, #ffc107); /* Sottolineatura gradiente */
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; }
-        .container { width: 90%; max-width: 1000px; margin: auto; }
+
+        /* --- RESET E LAYOUT DI BASE --- */
+        * {
+            box-sizing: border-box; /* Include padding e border nella larghezza/altezza */
+            margin: 0;             /* Rimuove i margini predefiniti */
+            padding: 0;            /* Rimuove il padding predefinito */
+        }
+
+        html {
+            scroll-behavior: smooth; /* Scorrimento fluido per gli anchor link */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Font pulito e moderno */
+            background: var(--bg);        /* Sfondo generale */
+            color: var(--text);           /* Colore testo principale */
+            line-height: 1.6;             /* Altezza riga per leggibilità */
+            min-height: 100vh;            /* Forza il body ad essere almeno alto come la viewport */
+            display: flex;                /* Usa flexbox per il layout principale */
+            flex-direction: column;       /* Organizza gli elementi in colonna */
+        }
+
+        .container {
+            width: 90%;          /* Larghezza fluida del contenuto */
+            max-width: 1000px;   /* Larghezza massima per il contenuto principale */
+            margin: auto;        /* Centra il contenitore */
+            padding: 0 1rem;     /* Padding laterale per evitare che il contenuto tocchi i bordi */
+        }
 
         /* --- HEADER E NAVIGAZIONE --- */
         header {
-            background: var(--primary);
-            color: var(--white);
-            padding: 1rem 0;
-            box-shadow: 0 2px 8px var(--shadow);
-            position: sticky; /* Rende la barra di navigazione fissa */
-            top: 0;
-            z-index: 100;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            background: var(--primary); /* Sfondo blu scuro */
+            color: var(--white);        /* Testo bianco */
+            padding: 1rem 0;            /* Padding verticale */
+            box-shadow: 0 2px 8px var(--shadow); /* Ombra leggera */
+            position: sticky;           /* Rende la barra di navigazione fissa in alto */
+            top: 0;                     /* Posiziona in alto */
+            z-index: 100;               /* Assicura che sia sopra altri elementi */
+            transition: background 0.3s ease, box-shadow 0.3s ease; /* Transizione fluida */
         }
-        header.scrolled { /* Classe aggiunta via JS allo scroll */
-            background: rgba(0, 64, 128, 0.95); /* Leggera trasparenza allo scroll */
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+
+        header.scrolled { /* Stili applicati allo scroll tramite JavaScript */
+            background: rgba(0, 64, 128, 0.95); /* Leggera trasparenza */
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25); /* Ombra più pronunciata */
         }
+
         header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap; /* Permette al contenuto di andare a capo su schermi piccoli */
+            display: flex;                 /* Usa flexbox */
+            justify-content: space-between; /* Spazio tra titolo e nav */
+            align-items: center;           /* Allinea verticalmente al centro */
+            flex-wrap: wrap;               /* Permette agli elementi di andare a capo */
         }
+
         header h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-size: 1.8rem; /* Dimensione titolo */
+            font-weight: 800;  /* Spessore del font */
             margin-right: 1.5rem;
-            flex-shrink: 0;
+            flex-shrink: 0;    /* Non si restringe */
         }
+
         nav {
             display: flex;
-            gap: 1.8rem; /* Spazio tra i link */
-            flex-wrap: wrap;
-            justify-content: flex-end; /* Allinea a destra per default */
-            flex-grow: 1;
+            gap: 1.8rem;             /* Spazio tra i link */
+            flex-wrap: wrap;         /* Permette ai link di andare a capo */
+            justify-content: flex-end; /* Allinea i link a destra */
+            flex-grow: 1;            /* Occupa lo spazio disponibile */
         }
-        
-        /* --- STILE AGGIORNATO PER I BOTTONI DI NAVIGAZIONE --- */
+
         nav a {
             color: var(--white);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.05rem;
             position: relative;
-            padding-bottom: 7px; /* Spazio per la sottolineatura più spessa */
+            padding-bottom: 7px; /* Spazio per la sottolineatura */
             transition: color 0.3s ease;
-            display: inline-flex;
+            display: inline-flex; /* Allinea icona e testo */
             align-items: center;
-            gap: 0.5rem;
-            white-space: nowrap;
+            gap: 0.5rem;         /* Spazio tra icona e testo */
+            white-space: nowrap; /* Impedisce al testo di andare a capo */
         }
 
-        /* Effetto sottolineatura con gradiente */
+        /* Effetto sottolineatura con gradiente per i link di navigazione */
         nav a::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 3px; /* Sottolineatura più spessa */
-            background: var(--gradient-underline); /* Gradiente di colore */
+            width: 0;                /* Inizialmente invisibile */
+            height: 3px;             /* Spessore della sottolineatura */
+            background: var(--gradient-underline); /* Gradiente definito in :root */
             left: 0;
             bottom: 0;
-            border-radius: 2px; /* Bordi leggermente arrotondati per la sottolineatura */
-            transition: width 0.3s ease-out;
+            border-radius: 2px;
+            transition: width 0.3s ease-out; /* Animazione sulla larghezza */
         }
 
-        /* Effetto al passaggio del mouse (hover) */
+        /* Effetto al passaggio del mouse (hover) per i link di navigazione */
         nav a:hover {
             color: #f0f0f0; /* Testo leggermente più luminoso */
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.4); /* Leggera luminescenza al testo */
-        }
-        nav a:hover::after {
-            width: 100%;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.4); /* Leggera luminescenza */
         }
 
-        /* Stile per le icone all'interno dei link */
-        nav a .fas {
+        nav a:hover::after {
+            width: 100%; /* Sottolineatura si espande al 100% */
+        }
+
+        nav a .fas { /* Stile per le icone all'interno dei link */
             font-size: 1.1rem;
-            color: inherit;
+            color: inherit; /* Eredita il colore dal link padre */
             transition: color 0.3s ease;
         }
 
-        /* L'icona eredita il colore luminoso al hover */
         nav a:hover .fas {
-             color: #f0f0f0; 
+            color: #f0f0f0; /* Icona diventa luminosa all'hover */
         }
 
-        /* --- MEDIA QUERIES PER HEADER E NAVIGAZIONE (adattamento responsivo) --- */
+        /* --- HERO SECTION (Sezione principale) --- */
+        .hero {
+            background: url('https://www.autosinistrate.com/wp-content/uploads/2019/02/gamma-auto-noleggio-.jpg') no-repeat center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Ombra al testo per leggibilità */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem; /* Dimensione aumentata per impatto */
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px; /* Limita la larghezza del paragrafo */
+        }
+
+        .hero .btn { /* Stile per i bottoni */
+            background: var(--accent);
+            color: var(--white);
+            padding: 1rem 2.5rem; /* Padding aumentato */
+            border-radius: 8px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Ombra più morbida */
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            display: inline-block; /* Per applicare padding e margin */
+            font-size: 1.1rem;
+        }
+
+        .hero .btn:hover {
+            background: #e66b00; /* Colore più scuro all'hover */
+            transform: translateY(-3px); /* Leggero sollevamento */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- CATALOGO VEICOLI --- */
+        .catalogo {
+            padding: 3rem 0; /* Padding verticale */
+            flex-grow: 1; /* Permette alla sezione di espandersi */
+        }
+
+        .catalogo h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 800; /* Più spesso */
+            color: var(--primary);
+            font-size: 2.2rem;
+        }
+
+        .filter-group {
+            max-width: 550px; /* Larghezza massima aumentata */
+            margin: 0 auto 2.5rem; /* Centrato e margine inferiore */
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem; /* Spazio tra i bottoni */
+            flex-wrap: wrap; /* Permette ai bottoni di andare a capo */
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.6rem 1.4rem; /* Padding aumentato */
+            border-radius: 25px; /* Bordi più arrotondati (pill shape) */
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1 1 auto; /* Permette ai bottoni di crescere e restringersi */
+            max-width: 150px; /* Larghezza massima per bottone */
+            text-align: center;
+            user-select: none; /* Impedisce la selezione del testo */
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 6px 16px rgba(0,64,128,0.4); /* Ombra più forte */
+            transform: translateY(-2px); /* Leggero sollevamento */
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 2.5rem; /* Spazio aumentato tra le card */
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px; /* Bordi più arrotondati */
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Ombra più profonda */
+            padding-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid #eee; /* Bordo sottile */
+        }
+
+        .card:hover {
+            transform: translateY(-8px); /* Sollevamento più pronunciato */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* Ombra ancora più profonda */
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px; /* Altezza immagine aumentata */
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent); /* Bordo più spesso */
+        }
+
+        .card h3 {
+            margin: 1.2rem 1.2rem 0.5rem; /* Margini aumentati */
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        .price {
+            margin: 0 1.2rem 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        .card ul {
+            margin: 0 1.5rem 1.5rem; /* Margini aumentati */
+            list-style: none;
+            padding: 0;
+            font-size: 0.95rem;
+            color: #555;
+            flex-grow: 1; /* Permette alla lista di occupare spazio */
+        }
+
+        .card ul li {
+            margin-bottom: 0.4rem; /* Spazio tra le voci */
+        }
+
+        .star-rating {
+            margin: 0 1.2rem 0.8rem; /* Margini consistenti */
+            display: flex;
+            align-items: center;
+            gap: 3px; /* Spazio tra le stelle */
+        }
+
+        .star {
+            width: 22px; /* Dimensione stelle leggermente aumentata */
+            height: 22px;
+            fill: var(--star-gold);
+            flex-shrink: 0; /* Evita che si restringano */
+        }
+
+        .star.empty {
+            fill: var(--star-grey);
+        }
+
+        /* --- REVIEWS SECTION --- */
+        .reviews-section {
+            padding: 4rem 0; /* Padding aumentato */
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg), #eef6ff); /* Sfondo leggermente sfumato */
+        }
+
+        .reviews-section h2 {
+            font-size: 2.8rem; /* Dimensione aumentata */
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            font-weight: 800;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Grid responsive */
+            gap: 2rem; /* Spazio tra le recensioni */
+        }
+
+        .review-card {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Ombra più pronunciata */
+            padding: 2rem; /* Padding aumentato */
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .review-card .star-rating {
+            margin: 0 0 0.8rem; /* Margine inferiore */
+        }
+
+        .review-card h4 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.8rem; /* Spazio sotto il nome */
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .review-card p {
+            font-size: 1rem;
+            color: #555;
+            flex-grow: 1; /* Permette al paragrafo di occupare spazio */
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 1rem; /* Padding aumentato */
+            margin-top: auto; /* Spinge il footer in fondo alla pagina */
+        }
+
+        /* --- MODAL (POP-UP) GENERICA --- */
+        .modal {
+            position: fixed; /* Fisso sullo schermo */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7); /* Sfondo semi-trasparente scuro */
+            display: flex; /* Centra il contenuto */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Sopra tutti gli altri elementi */
+            padding: 1rem;
+            opacity: 0;           /* Inizialmente invisibile */
+            visibility: hidden;   /* E nascosto da screen reader */
+            transition: opacity 0.3s ease, visibility 0.3s ease; /* Transizione per l'apertura */
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px; /* Bordi molto arrotondati */
+            max-width: 550px; /* Larghezza massima aumentata */
+            width: 100%;
+            padding: 1.5rem 2rem; /* Padding aumentato */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3); /* Ombra più forte */
+            position: relative;
+            text-align: center;
+            transform: translateY(30px); /* Parte leggermente sotto e si solleva */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            overflow-y: auto; /* Permette lo scroll se il contenuto è lungo */
+            max-height: 90vh; /* Limita l'altezza della modale */
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0); /* Si solleva alla posizione finale */
+        }
+
+        .modal-content img#modalImg {
+            width: 100%;
+            height: 220px; /* Altezza immagine aumentata */
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            border: 1px solid #eee;
+        }
+
+        .thumbnail-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+            margin-bottom: 1.5rem; /* Margine inferiore aumentato */
+            flex-wrap: wrap;
+        }
+
+        .thumbnail-gallery img {
+            width: 70px; /* Dimensioni thumbnail aumentate */
+            height: 50px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 3px solid transparent; /* Bordo più spesso */
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .thumbnail-gallery img.active {
+            border-color: var(--accent); /* Colore bordo per thumbnail attiva */
+            transform: scale(1.08); /* Effetto zoom sulla thumbnail attiva */
+        }
+
+        .thumbnail-gallery img:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0; /* Margini aumentati */
+            color: #444;
+            text-align: left;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .modal-content ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .modal-content .modal-price {
+            font-size: 1.8rem; /* Dimensione prezzo aumentata */
+            color: var(--primary);
+            font-weight: 800;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content .btn-info-whatsapp {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem; /* Padding aumentato */
+            border-radius: 10px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: background 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1.5rem;
+            width: calc(100% - 2rem); /* Riempi quasi tutta la larghezza */
+            max-width: 320px;
+            font-size: 1.1rem;
+            display: flex; /* Per centrare icona e testo */
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .modal-content .btn-info-whatsapp:hover {
+            background: #003366;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; /* Spazio dal bordo */
+            right: 15px;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 32px; /* Dimensione aumentata */
+            height: 32px;
+            font-weight: 700;
+            font-size: 1.4rem; /* Dimensione testo aumentata */
+            cursor: pointer;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: background 0.3s ease, transform 0.2s ease;
+            z-index: 10; /* Assicura che sia sopra gli altri elementi nella modale */
+        }
+
+        .close-btn:hover {
+            background: #e66b00;
+            transform: rotate(90deg); /* Effetto rotazione */
+        }
+
+        /* --- MODAL CONTATTI (Specifiche) --- */
+        #contactModal .modal-content {
+            text-align: center;
+        }
+
+        #contactModal h3 {
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        #contactModal p {
+            margin-bottom: 1.8rem;
+            font-size: 1.2rem;
+            color: #444;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #contactModal .phone-number {
+            font-size: 2rem; /* Dimensione numero di telefono aumentata */
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: flex; /* Per allineare icona telefono */
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        #contactModal .phone-number:hover {
+            color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        #contactModal .phone-number .fas {
+            font-size: 1.8rem;
+        }
+
+        #contactModal .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem; /* Spazio tra i bottoni */
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 2rem;
+        }
+
+        #contactModal .modal-buttons .btn {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+            display: inline-flex; /* Per icona e testo */
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        #contactModal .modal-buttons .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+
+        #contactModal .modal-buttons .btn-primary:hover {
+            background: #003366;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #contactModal .modal-buttons .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        #contactModal .modal-buttons .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #contactModal .modal-buttons .btn-whatsapp {
+            background: #25D366; /* Verde WhatsApp */
+            color: var(--white);
+            border: none;
+        }
+
+        #contactModal .modal-buttons .btn-whatsapp:hover {
+            background: #1DA851; /* Verde WhatsApp più scuro */
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        #contactModal .modal-buttons .btn-whatsapp .fab { /* Icona WhatsApp */
+            font-size: 1.2em;
+        }
+
+
+        /* --- FAQ SECTION --- */
+        .faq-section {
+            margin-top: 2rem;
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 2rem;
+        }
+
+        .faq-section h4 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .faq-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            background: var(--white);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            background: #f0f8ff; /* Sfondo leggermente blu */
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            transition: background 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: #e0f0ff;
+        }
+
+        .faq-question .arrow {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .arrow {
+            transform: rotate(90deg); /* Ruota la freccia quando attiva */
+        }
+
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0; /* Nasconde l'altezza */
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Transizione fluida */
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .faq-answer p {
+            padding-bottom: 1rem; /* Padding alla fine del paragrafo */
+            padding-top: 0.5rem; /* Padding all'inizio */
+        }
+
+        .faq-answer.active {
+            max-height: 300px; /* Altezza sufficiente, si può aumentare se le risposte sono lunghe */
+            padding: 1rem 1.2rem;
+        }
+
+        /* --- MEDIA QUERIES (Per la Responsività) --- */
         @media (max-width: 768px) {
             header .container {
                 flex-direction: column;
@@ -120,422 +734,693 @@
             nav {
                 width: 100%;
                 justify-content: center;
-                gap: 1rem; /* Riduci il gap per schermi più piccoli */
+                gap: 1rem;
             }
             nav a {
                 font-size: 0.95rem;
-                padding: 0 0.5rem 5px; /* Spazio per la sottolineatura più spesso */
-                gap: 0.3rem; /* Riduci lo spazio tra icona e testo su mobile */
+                padding: 0 0.5rem 5px;
+                gap: 0.3rem;
+            }
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .catalogo h2, .reviews-section h2 {
+                font-size: 2rem;
+            }
+            .filter-btn {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+                max-width: unset; /* Rimuove max-width su schermi più piccoli */
+                flex: 1 1 120px;
+            }
+            .grid {
+                gap: 1.5rem;
+            }
+            .card {
+                padding-bottom: 1rem;
+            }
+            .card h3 {
+                font-size: 1.2rem;
+                margin: 1rem;
+            }
+            .price {
+                font-size: 1.1rem;
+                margin: 0 1rem 0.5rem;
+            }
+            .review-card {
+                padding: 1.2rem;
+            }
+            .review-card h4 {
+                font-size: 1.1rem;
+            }
+            .review-card p {
+                font-size: 0.9rem;
+            }
+            .modal-content {
+                max-width: 95%;
+                padding: 1.2rem;
+                border-radius: 15px;
+            }
+            .modal-content img#modalImg {
+                height: 160px;
+                border-radius: 10px;
+            }
+            .modal-content h3 {
+                font-size: 1.5rem;
+            }
+            .modal-content .modal-price {
+                font-size: 1.6rem;
+            }
+            #contactModal .phone-number {
+                font-size: 1.6rem;
+            }
+            #contactModal .phone-number .fas {
+                font-size: 1.4rem;
             }
         }
+
         @media (max-width: 480px) {
             nav {
-                flex-direction: column; /* Impila i link verticalmente su schermi molto piccoli */
+                flex-direction: column;
                 gap: 0.8rem;
             }
             nav a {
-                padding: 0.2rem 0; /* Più padding verticale quando impilati */
-                justify-content: center; /* Centra anche le icone */
+                padding: 0.2rem 0;
+                justify-content: center;
+                font-size: 0.9rem;
             }
-        }
-
-        /* --- RESTO DEL TUO CSS ORIGINALE (non modificato) --- */
-        .hero { background: url('https://www.autosinistrate.com/wp-content/uploads/2019/02/gamma-auto-noleggio-.jpg') no-repeat center/cover; color: var(--white); text-align: center; padding: 2rem 1rem; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 200px; }
-        .hero h2 { font-size: 2.4rem; margin-bottom: 0.5rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 1.5rem; }
-        .hero .btn { background: var(--accent); color: var(--white); padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease, transform 0.2s ease; cursor: pointer; border: none; margin-top: 0.5rem; }
-        .hero .btn:hover { background: #e66b00; transform: translateY(-2px); }
-
-        .catalogo { padding: 3rem 0; }
-        .catalogo h2 { text-align: center; margin-bottom: 1.5rem; font-weight: 700; color: var(--primary); }
-        .filter-group { max-width: 480px; margin: 0 auto 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-        .filter-btn { background: var(--white); border: 2px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; flex: 1 1 100px; text-align: center; user-select: none; }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(0,64,128,0.4); }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 16px var(--shadow); padding-bottom: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; cursor: pointer; position: relative; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px var(--shadow); }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-bottom: 2px solid var(--accent); }
-        .card h3 { margin: 1rem 1rem 0.3rem; font-weight: 700; color: var(--primary); }
-        .price { margin: 0 1rem 0.5rem; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
-        .card ul { margin: 0 1.5rem 1rem; list-style: none; padding: 0; font-size: 0.95rem; color: #555; flex-grow: 1; }
-        .star-rating { margin: 0 1rem 0.5rem; display: flex; align-items: center; gap: 2px; }
-        .star { width: 20px; height: 20px; fill: var(--star-gold); }
-        .star.empty { fill: var(--star-grey); }
-
-        footer { background: var(--primary); color: var(--white); text-align: center; padding: 2rem 1rem; margin-top: 3rem; }
-
-        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 1rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-        .modal.active { display: flex; opacity: 1; visibility: visible; }
-        .modal-content { 
-            background: var(--white); 
-            border-radius: 16px; 
-            max-width: 100px; 
-            width: 100%; 
-            padding: 1rem; 
-            box-shadow: 0 8px 20px var(--shadow); 
-            position: relative; 
-            text-align: center; 
-            transform: translateY(20px); 
-            transition: transform 0.3s ease, opacity 0.3s ease; 
-        }/* --- RESTO DEL TUO CSS ORIGINALE (non modificato) --- */
-.hero {
-    background: url('https://www.autosinistrate.com/wp-content/uploads/2019/02/gamma-auto-noleggio-.jpg') no-repeat center/cover;
-    color: var(--white);
-    text-align: center;
-    padding: 2rem 1rem;
-    font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px; /* CAMBIA QUI: da 200px a 400px o più */
-}
-        .modal.active .modal-content { transform: translateY(0); }
-        .modal-content img#modalImg { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-            border-radius: 12px; 
-            margin-bottom: 1rem; 
-        }
-        .modal-content h3 { margin-bottom: 0.5rem; color: var(--primary); font-weight: 700; }
-        .modal-content ul { list-style: none; padding: 0; margin: 1rem 0; color: #444; text-align: left; }
-        .modal-content ul li { 
-            margin-bottom: 0.7rem; 
-            font-size: 0.9rem; 
-        }
-        .modal-content .modal-price { font-size: 1.5rem; color: var(--primary); font-weight: 800; margin-top: 1rem; }
-        .modal-content .btn-info-whatsapp { background: var(--primary); color: var(--white); padding: 0.85rem 1.5rem; border-radius: 8px; font-weight: 600; border: none; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease, transform 0.2s ease; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 1.5rem; width: calc(100% - 2rem); max-width: 300px; }
-        .modal-content .btn-info-whatsapp:hover { background: #003366; transform: translateY(-2px); }
-        .close-btn { position: absolute; top: 12px; right: 12px; background: var(--accent); color: var(--white); border: none; border-radius: 50%; width: 28px; height: 28px; font-weight: 700; font-size: 1.2rem; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease; }
-        .close-btn:hover { background: #e66b00; }
-
-        .thumbnail-gallery { display: flex; justify-content: center; gap: 0.7rem; margin-top: 0.7rem; flex-wrap: wrap; }
-        .thumbnail-gallery img { width: 60px; height: 40px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.3s ease, transform 0.2s ease; }
-        .thumbnail-gallery img.active { border-color: var(--accent); transform: scale(1.05); }
-        .thumbnail-gallery img:hover { border-color: var(--primary); transform: scale(1.03); }
-
-        #contactModal .modal-content { text-align: center; }
-        #contactModal h3 { margin-bottom: 1rem; color: var(--primary); font-weight: 700; }
-        #contactModal p { margin-bottom: 1.5rem; font-size: 1.1rem; color: #444; }
-        #contactModal .phone-number { font-size: 1.6rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem; display: block; text-decoration: none; transition: color 0.3s ease; }
-        #contactModal .phone-number:hover { color: var(--accent); }
-        #contactModal .modal-buttons { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1.5rem; }
-        #contactModal .modal-buttons .btn { width: 100%; padding: 0.85rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 8px; transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease; text-decoration: none; display: inline-block; cursor: pointer; }
-        #contactModal .modal-buttons .btn-primary { background: var(--primary); color: var(--white); border: none; }
-        #contactModal .modal-buttons .btn-primary:hover { background: #003366; transform: translateY(-2px); }
-        #contactModal .modal-buttons .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
-        #contactModal .modal-buttons .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); border-color: var(--primary); }
-        #contactModal .modal-buttons .btn-whatsapp { background: #25D366; color: var(--white); border: none; }
-        #contactModal .modal-buttons .btn-whatsapp:hover { background: #1DA851; transform: translateY(-2px); }
-
-        .faq-section { margin-top: 1.5rem; text-align: left; border-top: 1px solid #eee; padding-top: 1.5rem; }
-        .faq-section h4 { color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem; text-align: center; }
-        .faq-item { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 0.8rem; overflow: hidden; background: var(--white); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .faq-question { background: #f0f8ff; padding: 0.8rem 1rem; cursor: pointer; font-weight: 600; color: var(--primary); display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }
-        .faq-question:hover { background: #e0f0ff; }
-        .faq-question .arrow { font-size: 1.2rem; transition: transform 0.3s ease; }
-        .faq-question.active .arrow { transform: rotate(90deg); }
-        .faq-answer { padding: 0 1rem; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; color: #555; font-size: 0.95rem; }
-        .faq-answer p { padding-bottom: 0.8rem; }
-        .faq-answer.active { max-height: 200px; padding: 0.8rem 1rem; }
-
-        @media (min-width: 600px) {
-            .hero .btn:not(:last-child) { margin-right: 1rem; }
-            #contactModal .modal-buttons { flex-direction: row; justify-content: center; }
-            #contactModal .modal-buttons .btn { width: auto; min-width: 180px; }
-            .modal-content {
-                max-width: 480px; 
-                padding: 1.5rem;
+            .hero h2 {
+                font-size: 1.8rem;
             }
-            .modal-content img#modalImg {
-                height: 260px;
+            .hero p {
+                font-size: 0.95rem;
             }
-            .modal-content ul li {
+            .hero .btn {
+                padding: 0.8rem 1.8rem;
                 font-size: 1rem;
             }
+            .catalogo h2, .reviews-section h2 {
+                font-size: 1.8rem;
+            }
+            .filter-group {
+                gap: 0.8rem;
+            }
+            .filter-btn {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .grid {
+                grid-template-columns: 1fr; /* Una colonna su schermi molto piccoli */
+            }
+            .modal-content {
+                padding: 1rem;
+            }
+            .thumbnail-gallery img {
+                width: 50px;
+                height: 35px;
+            }
+            #contactModal h3 {
+                font-size: 1.6rem;
+            }
+            #contactModal p {
+                font-size: 1rem;
+            }
+            #contactModal .phone-number {
+                font-size: 1.4rem;
+            }
+            #contactModal .phone-number .fas {
+                font-size: 1.2rem;
+            }
+            #contactModal .modal-buttons .btn {
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+            }
+            .faq-question {
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+            }
+            .faq-answer {
+                font-size: 0.9rem;
+            }
         }
-        @media (max-width: 600px) {
-            .hero { padding: 1.5rem 1rem; min-height: 180px; }
-            .hero h2 { font-size: 1.8rem; }
-            .hero p { font-size: 1rem; }
-            .grid { grid-template-columns: 1fr; }
-            /* Non toccato qui, gestito dalle media query della nav */
-        }
+        /* --- CSS FINISCE QUI --- */
     </style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <h1>Gogo Rent</h1>
-        <nav>
-            <a href="info.html"><i class="fas fa-info-circle"></i> Info</a>
-             <a href="prenotazione.html"><i class="fas fa-info-circle"></i> Prenotazione</a>
-            <a href="#"><i class="fas fa-home"></i> Home</a>
-            <a href="#catalogo"><i class="fas fa-car"></i> Catalogo</a> <a href="reviews.html"><i class="fas fa-star"></i> Cosa dicono di noi</a> 
-            <a href="#" id="contactNavLink"><i class="fas fa-headset"></i> Contatti</a>
-        </nav>
-    </div>
-</header>
-
-<section class="hero">
-    <h2>Scopri i nostri veicoli</h2>
-    <p>Auto e scooter selezionati con cura per te</p>
-    <button class="btn" id="heroContactBtn">Contattaci</button>
-</section>
-
-<section class="catalogo container" aria-label="Catalogo veicoli" id="catalogo">
-    <h2>Catalogo Veicoli</h2>
-
-    <div class="filter-group" role="group" aria-label="Filtra veicoli">
-        <button class="filter-btn active" data-filter="all" aria-pressed="true">Tutti</button>
-        <button class="filter-btn" data-filter="auto" aria-pressed="false">Auto</button>
-        <button class="filter-btn" data-filter="scooter" aria-pressed="false">Scooter</button>
-    </div>
-
-    <div class="grid" id="vehicleGrid" aria-live="polite"></div>
-</section>
-
-<div class="modal" id="vehicleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
-    <div class="modal-content">
-        <button class="close-btn" aria-label="Chiudi">&times;</button>
-        <img id="modalImg" src="" alt="" />
-        <div class="thumbnail-gallery" id="thumbnailGallery"></div>
-        <h3 id="modalTitle"></h3>
-        <ul id="modalDesc"></ul>
-        <div class="star-rating" id="modalRating"></div>
-        <p class="modal-price" id="modalCalculatedPrice"></p>
-        <a href="#" id="infoWhatsappBtn" class="btn-info-whatsapp" target="_blank">Altre Info (WhatsApp)</a>
-    </div>
-</div>
-
-<div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" aria-describedby="contactModalDesc">
-    <div class="modal-content">
-        <button class="close-btn" aria-label="Chiudi">&times;</button>
-        <h3 id="contactModalTitle">Contattaci per Prenotare!</h3>
-        <p id="contactModalDesc">Siamo qui per aiutarti. Contattaci tramite WhatsApp per domande o prenotazioni.</p>
-        
-        <a href="tel:+393517223520" class="phone-number">📞 +39 3517223520</a> 
-
-        <div class="faq-section">
-            <h4>Domande Frequenti</h4>
-            <div class="faq-item">
-                <div class="faq-question">Quali documenti servono?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>Patente, documento d'identità e carta di credito (per cauzione).</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Età minima per noleggiare?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>21 anni per scooter, 23 per auto.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Posso riconsegnare in ritardo?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>Rispettare l'orario; avvisare in caso di imprevisti per evitare costi extra.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Cauzione, come funziona?<span class="arrow">▶</span></div>
-                <div class="faq-answer"><p>Bloccata su carta di credito al ritiro; sbloccata a fine noleggio, verificando le condizioni.</p></div>
-            </div>
+    <header>
+        <div class="container">
+            <h1>Gogo Rent</h1>
+            <nav aria-label="Navigazione principale">
+                <a href="#home"><i class="fas fa-home"></i> Home</a>
+                <a href="#catalogo"><i class="fas fa-car"></i> Catalogo</a>
+                <a href="#reviews"><i class="fas fa-star"></i> Recensioni</a>
+                <a href="#contact" id="contactNavLink"><i class="fas fa-headset"></i> Contatti</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="modal-buttons">
-            <a href="https://wa.me/393517223520?text=Ciao%2C%20vorrei%20fare%20una%20domanda%20generica%20sui%20vostri%20servizi." class="btn btn-secondary btn-whatsapp" target="_blank">Fai una domanda (WhatsApp)</a>
-            <a href="#" id="bookNowWhatsappBtn" class="btn btn-primary btn-whatsapp" target="_blank">Prenota Ora (WhatsApp)</a>
-        </div>
-    </div>
-</div>
+    <main>
+        <section class="hero" id="home" aria-labelledby="heroTitle">
+            <h2 id="heroTitle">Scegli la libertà, noleggia il tuo veicolo con Gogo Rent!</h2>
+            <p>Auto e scooter selezionati con cura per offrirti la migliore esperienza di mobilità.</p>
+            <button class="btn" id="heroContactBtn" aria-label="Contattaci per informazioni o prenotazioni">Contattaci subito</button>
+        </section>
 
-<footer>
-    <p>© 2025 Gogo Rent - Tutti i diritti riservati</p>
-</footer>
+        <section class="catalogo container" aria-label="Catalogo veicoli a noleggio" id="catalogo">
+            <h2>Il Nostro Catalogo Veicoli</h2>
 
-<script>
-    const vehicles = [
-        { id: 1, type: 'auto', name: 'Ford Panda', fuel: 'Benzina', km: 45000, desc: 'Auto compatta e affidabile per la città.', transmission: 'Manuale', year: 2015, images: ['https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=320&q=80'], dailyRate: 35, rating: 4 },
-        { id: 2, type: 'auto', name: 'Audi A4', fuel: 'Diesel', km: 89000, desc: 'Auto elegante con prestazioni elevate.', transmission: 'Automatico', year: 2017, images: ['https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1511910849309-86dbaee72b39?auto=format&fit=crop&w=320&q=80'], dailyRate: 70, rating: 5 },
-        { id: 3, type: 'scooter', name: 'Piaggio Liberty', fuel: 'Benzina', km: 12000, desc: 'Scooter pratico e maneggevole per gli spostamenti urbani.', transmission: 'Automatico', year: 2019, images: ['https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=320&q=80'], dailyRate: 20, rating: 3 },
-        { id: 4, type: 'auto', name: 'Ford Focus', fuel: 'Benzina', km: 60000, desc: 'Auto versatile ideale per la famiglia.', transmission: 'Manuale', year: 2018, images: ['https://images.unsplash.com/photo-1486308510493-cb33e52e9e56?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&fit=crop&w=320&q=80'], dailyRate: 45, rating: 4 },
-        { id: 5, type: 'scooter', name: 'Yamaha NMAX', fuel: 'Benzina', km: 15000, desc: 'Scooter moderno con ottima autonomia.', transmission: 'Automatico', year: 2020, images: ['https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80'], dailyRate: 25, rating: 5 }
-    ];
+            <div class="filter-group" role="group" aria-label="Filtra veicoli per tipo">
+                <button class="filter-btn active" data-filter="all" aria-pressed="true">Tutti i Veicoli</button>
+                <button class="filter-btn" data-filter="auto" aria-pressed="false">Auto</button>
+                <button class="filter-btn" data-filter="scooter" aria-pressed="false">Scooter</button>
+            </div>
 
-    const grid = document.getElementById('vehicleGrid');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const vehicleModal = document.getElementById('vehicleModal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const thumbnailGallery = document.getElementById('thumbnailGallery');
-    const closeVehicleModalBtn = vehicleModal.querySelector('.close-btn');
-    const modalRating = document.getElementById('modalRating');
-    const modalCalculatedPrice = document.getElementById('modalCalculatedPrice');
-    const infoWhatsappBtn = document.getElementById('infoWhatsappBtn'); 
-    const contactNavLink = document.getElementById('contactNavLink'); 
-    const heroContactBtn = document.getElementById('heroContactBtn'); 
-    const contactModal = document.getElementById('contactModal');
-    const closeContactModalBtn = contactModal.querySelector('.close-btn');
-    const bookNowWhatsappBtn = document.getElementById('bookNowWhatsappBtn'); 
-    const phoneNumber = '393517223520'; 
-
-    let currentFilter = 'all';
-
-    function generateStars(rating) {
-        let starsHtml = '';
-        for (let i = 1; i <= 5; i++) {
-            starsHtml += `<svg class="star ${i <= rating ? '' : 'empty'}" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>`;
-        }
-        return starsHtml;
-    }
-
-    function displayVehicles(filter = 'all') {
-        grid.innerHTML = '';
-        let filteredVehicles = (filter !== 'all') ? vehicles.filter(v => v.type === filter) : vehicles;
-
-        if (filteredVehicles.length === 0) {
-            grid.innerHTML = `<p style="grid-column: 1 / -1; text-align:center; padding: 2rem 0;">Nessun veicolo trovato.</p>`;
-            return;
-        }
-
-        filteredVehicles.forEach(vehicle => {
-            const card = document.createElement('article');
-            card.className = `card`;
-            card.setAttribute('tabindex', '0');
-            card.setAttribute('role', 'button');
-            card.setAttribute('aria-label', `${vehicle.name}, clicca per dettagli`);
-
-            card.innerHTML = `
-                <img src="${vehicle.images[0]}" alt="${vehicle.name}" />
-                <h3>${vehicle.name}</h3>
-                <p class="price">Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}</p>
-                <div class="star-rating" aria-label="Valutazione: ${vehicle.rating} su 5 stelle">
-                    ${generateStars(vehicle.rating)}
+            <div class="grid" id="vehicleGrid" aria-live="polite">
                 </div>
-                <ul>
-                    <li><strong>Alimentazione:</strong> ${vehicle.fuel}</li>
-                    <li><strong>Chilometri:</strong> ${vehicle.km.toLocaleString('it-IT')} km</li>
-                    <li><strong>Anno:</strong> ${vehicle.year}</li>
-                    <li><strong>Trasmissione:</strong> ${vehicle.transmission}</li>
-                </ul>
+        </section>
+
+        <section class="reviews-section container" aria-label="Cosa dicono di noi" id="reviews">
+            <h2>Cosa Dicono i Nostri Clienti</h2>
+            <div class="review-grid">
+                <article class="review-card">
+                    <div class="star-rating" aria-label="Valutazione: 5 su 5 stelle">
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                    </div>
+                    <h4>Mario Rossi</h4>
+                    <p>"Servizio eccellente! Ho noleggiato una Ford Panda per un weekend ed è stata perfetta per esplorare la città. Personale cordiale e disponibile. Consigliatissimo!"</p>
+                </article>
+                <article class="review-card">
+                    <div class="star-rating" aria-label="Valutazione: 4 su 5 stelle">
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star empty" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                    </div>
+                    <h4>Anna Bianchi</h4>
+                    <p>"Ho noleggiato uno scooter Yamaha NMAX per le mie vacanze. Davvero comodo per muoversi. L'unico appunto è stato il tempo di attesa al ritiro, ma complessivamente soddisfatta. Tornerò!"</p>
+                </article>
+                <article class="review-card">
+                    <div class="star-rating" aria-label="Valutazione: 5 su 5 stelle">
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                    </div>
+                    <h4>Luca Verdi</h4>
+                    <p>"Ho usato Gogo Rent per un viaggio di lavoro con una Audi A4. Macchina impeccabile e consegna puntuale. Professionali e precisi in ogni dettaglio."</p>
+                </article>
+                <article class="review-card">
+                    <div class="star-rating" aria-label="Valutazione: 4 su 5 stelle">
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star empty" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                    </div>
+                    <h4>Giorgia Neri</h4>
+                    <p>"La Ford Focus è stata un'ottima scelta per la mia famiglia. Spaziosa e confortevole. Consiglierei di migliorare la chiarezza sulle opzioni aggiuntive al momento della prenotazione."</p>
+                </article>
+                <article class="review-card">
+                    <div class="star-rating" aria-label="Valutazione: 3 su 5 stelle">
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star empty" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                        <svg class="star empty" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>
+                    </div>
+                    <h4>Paolo Gialli</h4>
+                    <p>"Scooter Piaggio Liberty comodo, ma forse un po' lento per le mie esigenze in autostrada. Prezzo ottimo, comunque, per l'utilizzo cittadino."</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal" id="vehicleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Chiudi dettagli veicolo">&times;</button>
+            <img id="modalImg" src="" alt="Immagine veicolo" />
+            <div class="thumbnail-gallery" id="thumbnailGallery"></div>
+            <h3 id="modalTitle"></h3>
+            <ul id="modalDesc"></ul>
+            <div class="star-rating" id="modalRating" aria-label="Valutazione del veicolo"></div>
+            <p class="modal-price" id="modalCalculatedPrice"></p>
+            <a href="#" id="infoWhatsappBtn" class="btn-info-whatsapp" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> Richiedi Info (WhatsApp)
+            </a>
+        </div>
+    </div>
+
+    <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" aria-describedby="contactModalDesc">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Chiudi contatti">&times;</button>
+            <h3 id="contactModalTitle">Contattaci per Prenotare!</h3>
+            <p id="contactModalDesc">Siamo qui per aiutarti. Contattaci tramite WhatsApp per domande o per procedere con una prenotazione.</p>
+
+            <a href="tel:+393517223520" class="phone-number" aria-label="Chiama il numero di telefono">📞 +39 3517223520</a>
+
+            <div class="faq-section">
+                <h4>Domande Frequenti</h4>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">Quali documenti servono per il noleggio?<span class="arrow">▶</span></div>
+                    <div class="faq-answer"><p>È richiesta la patente di guida valida, un documento d'identità (carta d'identità o passaporto) e una carta di credito a nome del conducente per la cauzione.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">Qual è l'età minima per noleggiare?<span class="arrow">▶</span></div>
+                    <div class="faq-answer"><p>L'età minima per il noleggio di scooter è 21 anni, mentre per le auto è 23 anni. Potrebbero esserci supplementi per i conducenti giovani.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">Posso riconsegnare il veicolo in ritardo?<span class="arrow">▶</span></div>
+                    <div class="faq-answer"><p>È importante rispettare l'orario di riconsegna concordato. In caso di imprevisti, ti preghiamo di avvisarci il prima possibile per evitare costi aggiuntivi per ritardo.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" tabindex="0">Come funziona la cauzione?<span class="arrow">▶</span></div>
+                    <div class="faq-answer"><p>La cauzione viene bloccata sulla carta di credito fornita al momento del ritiro del veicolo. Verrà sbloccata automaticamente al termine del noleggio, previa verifica delle condizioni del veicolo.</p></div>
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <a href="https://wa.me/393517223520?text=Ciao%2C%20vorrei%20fare%20una%20domanda%20generica%20sui%20vostri%20servizi." class="btn btn-secondary btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i> Fai una domanda (WhatsApp)
+                </a>
+                <a href="https://wa.me/393517223520?text=Ciao%2C%20vorrei%20procedere%20con%20una%20prenotazione." id="bookNowWhatsappBtn" class="btn btn-primary btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i> Prenota Ora (WhatsApp)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Gogo Rent - Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* --- JAVASCRIPT INIZIA QUI --- */
+
+        // Dati dei veicoli: un array di oggetti per una gestione più organizzata dei dati
+        const vehicles = [
+            {
+                id: 1,
+                type: 'auto',
+                name: 'Ford Panda',
+                fuel: 'Benzina',
+                km: 45000,
+                desc: 'Auto compatta e affidabile, ideale per la città e i brevi spostamenti. Facile da parcheggiare.',
+                transmission: 'Manuale',
+                year: 2015,
+                images: [
+                    'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80',
+                    'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=320&q=80'
+                ],
+                dailyRate: 35,
+                rating: 4
+            },
+            {
+                id: 2,
+                type: 'auto',
+                name: 'Audi A4',
+                fuel: 'Diesel',
+                km: 89000,
+                desc: 'Auto elegante e spaziosa con prestazioni elevate, perfetta per lunghi viaggi e comfort.',
+                transmission: 'Automatico',
+                year: 2017,
+                images: [
+                    'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=320&q=80',
+                    'https://images.unsplash.com/photo-1511910849309-86dbaee72b39?auto=format&fit=crop&w=320&q=80'
+                ],
+                dailyRate: 70,
+                rating: 5
+            },
+            {
+                id: 3,
+                type: 'scooter',
+                name: 'Piaggio Liberty',
+                fuel: 'Benzina',
+                km: 12000,
+                desc: 'Scooter pratico e maneggevole, ottimo per muoversi agilmente nel traffico cittadino.',
+                transmission: 'Automatico',
+                year: 2019,
+                images: [
+                    'https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=320&q=80',
+                    'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=320&q=80'
+                ],
+                dailyRate: 20,
+                rating: 3
+            },
+            {
+                id: 4,
+                type: 'auto',
+                name: 'Ford Focus',
+                fuel: 'Benzina',
+                km: 60000,
+                desc: 'Auto versatile e confortevole, ideale per la famiglia e adatta sia alla città che alle gite fuori porta.',
+                transmission: 'Manuale',
+                year: 2018,
+                images: [
+                    'https://images.unsplash.com/photo-1486308510493-cb33e52e9e56?auto=format&fit=crop&w=320&q=80',
+                    'https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&fit=crop&w=320&q=80'
+                ],
+                dailyRate: 45,
+                rating: 4
+            },
+            {
+                id: 5,
+                type: 'scooter',
+                name: 'Yamaha NMAX',
+                fuel: 'Benzina',
+                km: 15000,
+                desc: 'Scooter moderno con ottima autonomia e comfort, perfetto per gli spostamenti quotidiani e brevi tragitti.',
+                transmission: 'Automatico',
+                year: 2020,
+                images: [
+                    'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=320&q=80',
+                    'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80'
+                ],
+                dailyRate: 25,
+                rating: 5
+            }
+        ];
+
+        // Riferimenti agli elementi DOM (Document Object Model)
+        const DOM = {
+            grid: document.getElementById('vehicleGrid'),
+            filterBtns: document.querySelectorAll('.filter-btn'),
+            vehicleModal: document.getElementById('vehicleModal'),
+            modalImg: document.getElementById('modalImg'),
+            modalTitle: document.getElementById('modalTitle'),
+            modalDesc: document.getElementById('modalDesc'),
+            thumbnailGallery: document.getElementById('thumbnailGallery'),
+            closeVehicleModalBtn: document.getElementById('vehicleModal')?.querySelector('.close-btn'),
+            modalRating: document.getElementById('modalRating'),
+            modalCalculatedPrice: document.getElementById('modalCalculatedPrice'),
+            infoWhatsappBtn: document.getElementById('infoWhatsappBtn'),
+            contactNavLink: document.getElementById('contactNavLink'),
+            heroContactBtn: document.getElementById('heroContactBtn'),
+            contactModal: document.getElementById('contactModal'),
+            closeContactModalBtn: document.getElementById('contactModal')?.querySelector('.close-btn'),
+            bookNowWhatsappBtn: document.getElementById('bookNowWhatsappBtn'),
+            faqQuestions: document.querySelectorAll('.faq-question'),
+            header: document.querySelector('header'),
+            navLinks: document.querySelectorAll('nav a[href^="#"]')
+        };
+
+        const WHATSAPP_PHONE_NUMBER = '393517223520';
+        let currentVehicleFilter = 'all'; // Stato del filtro attuale
+
+        /**
+         * Genera il markup HTML per le stelle di valutazione.
+         * @param {number} rating - La valutazione da 1 a 5.
+         * @returns {string} - Il markup HTML delle stelle SVG.
+         */
+        function generateStarsHtml(rating) {
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                // Aggiunge la classe 'empty' se la stella non è "piena"
+                starsHtml += `<svg class="star ${i <= rating ? '' : 'empty'}" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>`;
+            }
+            return starsHtml;
+        }
+
+        /**
+         * Visualizza i veicoli nel catalogo in base al filtro corrente.
+         * @param {string} filter - Il tipo di veicolo da filtrare ('all', 'auto', 'scooter').
+         */
+        function displayVehicles(filter = 'all') {
+            if (!DOM.grid) return; // Esce se l'elemento della griglia non esiste
+
+            DOM.grid.innerHTML = ''; // Pulisce la griglia esistente
+            const filteredVehicles = (filter !== 'all') ? vehicles.filter(v => v.type === filter) : vehicles;
+
+            if (filteredVehicles.length === 0) {
+                DOM.grid.innerHTML = `<p style="grid-column: 1 / -1; text-align:center; padding: 2rem 0; color: #666;">Nessun veicolo trovato per questo filtro. Prova a selezionare "Tutti i Veicoli".</p>`;
+                return;
+            }
+
+            filteredVehicles.forEach(vehicle => {
+                const card = document.createElement('article');
+                card.className = `card`;
+                card.setAttribute('tabindex', '0'); // Rende la card accessibile con tastiera
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `${vehicle.name}, clicca per dettagli`);
+
+                card.innerHTML = `
+                    <img src="${vehicle.images[0]}" alt="${vehicle.name}" loading="lazy" />
+                    <h3>${vehicle.name}</h3>
+                    <p class="price">Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}</p>
+                    <div class="star-rating" aria-label="Valutazione: ${vehicle.rating} su 5 stelle">
+                        ${generateStarsHtml(vehicle.rating)}
+                    </div>
+                    <ul>
+                        <li><strong>Alimentazione:</strong> ${vehicle.fuel}</li>
+                        <li><strong>Chilometri:</strong> ${vehicle.km.toLocaleString('it-IT')} km</li>
+                        <li><strong>Anno:</strong> ${vehicle.year}</li>
+                        <li><strong>Trasmissione:</strong> ${vehicle.transmission}</li>
+                    </ul>
+                `;
+                // Gestione click e tastiera per aprire la modale del veicolo
+                card.addEventListener('click', () => openVehicleModal(vehicle));
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        openVehicleModal(vehicle);
+                    }
+                });
+                DOM.grid.appendChild(card);
+            });
+        }
+
+        /**
+         * Apre la modale con i dettagli di un veicolo specifico.
+         * @param {object} vehicle - L'oggetto veicolo da visualizzare.
+         */
+        function openVehicleModal(vehicle) {
+            if (!DOM.vehicleModal) return;
+
+            DOM.modalImg.src = vehicle.images[0];
+            DOM.modalImg.alt = `Immagine principale di ${vehicle.name}`;
+            DOM.modalTitle.textContent = vehicle.name;
+            DOM.modalDesc.innerHTML = `
+                <li><strong>Descrizione:</strong> ${vehicle.desc}</li>
+                <li><strong>Alimentazione:</strong> ${vehicle.fuel}</li>
+                <li><strong>Chilometri:</strong> ${vehicle.km.toLocaleString('it-IT')} km</li>
+                <li><strong>Trasmissione:</strong> ${vehicle.transmission}</li>
+                <li><strong>Anno:</strong> ${vehicle.year}</li>
             `;
-            card.addEventListener('click', () => openVehicleModal(vehicle));
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    openVehicleModal(vehicle);
+            DOM.modalRating.innerHTML = generateStarsHtml(vehicle.rating);
+            DOM.modalCalculatedPrice.textContent = `Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}`;
+
+            // Popola la galleria delle miniature
+            DOM.thumbnailGallery.innerHTML = '';
+            vehicle.images.forEach((image, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = image;
+                thumb.alt = `Miniatura ${index + 1} di ${vehicle.name}`;
+                thumb.classList.add('thumbnail');
+                if (index === 0) { thumb.classList.add('active'); } // La prima miniatura è attiva di default
+                thumb.addEventListener('click', () => {
+                    DOM.modalImg.src = image; // Cambia l'immagine principale
+                    DOM.modalImg.alt = `Immagine ${index + 1} di ${vehicle.name}`; // Aggiorna alt text per accessibilità
+                    document.querySelectorAll('.thumbnail-gallery img').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active'); // Attiva la miniatura selezionata
+                });
+                DOM.thumbnailGallery.appendChild(thumb);
+            });
+
+            const whatsappMessage = encodeURIComponent(`Ciao, vorrei più informazioni su ${vehicle.name} (ID: ${vehicle.id}).`);
+            DOM.infoWhatsappBtn.href = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${whatsappMessage}`;
+
+            DOM.vehicleModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Impedisce lo scroll del body quando la modale è aperta
+            DOM.vehicleModal.focus(); // Sposta il focus sulla modale per accessibilità
+        }
+
+        /**
+         * Chiude una modale specifica.
+         * @param {HTMLElement} modalElement - L'elemento della modale da chiudere.
+         */
+        function closeModal(modalElement) {
+            if (!modalElement) return;
+            modalElement.classList.remove('active');
+            document.body.style.overflow = ''; // Ripristina lo scroll del body
+        }
+
+        /**
+         * Inizializza tutti gli event listener per la pagina.
+         */
+        function initializeEventListeners() {
+            // Event listener per i pulsanti di filtro del catalogo
+            DOM.filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Rimuove la classe 'active' da tutti i pulsanti e la aggiunge a quello cliccato
+                    DOM.filterBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-pressed', 'false');
+                    });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-pressed', 'true');
+                    currentVehicleFilter = btn.dataset.filter;
+                    displayVehicles(currentVehicleFilter); // Aggiorna la visualizzazione dei veicoli
+                });
+            });
+
+            // Event listener per la chiusura delle modali
+            if (DOM.closeVehicleModalBtn) {
+                DOM.closeVehicleModalBtn.addEventListener('click', () => closeModal(DOM.vehicleModal));
+            }
+            if (DOM.closeContactModalBtn) {
+                DOM.closeContactModalBtn.addEventListener('click', () => closeModal(DOM.contactModal));
+            }
+
+            // Chiude le modali cliccando fuori dal contenuto
+            if (DOM.vehicleModal) {
+                DOM.vehicleModal.addEventListener('click', (e) => {
+                    if (e.target === DOM.vehicleModal) closeModal(DOM.vehicleModal);
+                });
+            }
+            if (DOM.contactModal) {
+                DOM.contactModal.addEventListener('click', (e) => {
+                    if (e.target === DOM.contactModal) closeModal(DOM.contactModal);
+                });
+            }
+
+            // Chiude le modali premendo 'Esc'
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (DOM.vehicleModal && DOM.vehicleModal.classList.contains('active')) {
+                        closeModal(DOM.vehicleModal);
+                    }
+                    if (DOM.contactModal && DOM.contactModal.classList.contains('active')) {
+                        closeModal(DOM.contactModal);
+                    }
                 }
             });
-            grid.appendChild(card);
-        });
-    }
 
-    function openVehicleModal(vehicle) {
-        modalImg.src = vehicle.images[0];
-        modalImg.alt = vehicle.name;
-        modalTitle.textContent = vehicle.name;
-        modalDesc.innerHTML = `
-            <li><strong>Descrizione:</strong> ${vehicle.desc}</li>
-            <li><strong>Alimentazione:</strong> ${vehicle.fuel}</li>
-            <li><strong>Chilometri:</strong> ${vehicle.km.toLocaleString('it-IT')} km</li>
-            <li><strong>Trasmissione:</strong> ${vehicle.transmission}</li>
-            <li><strong>Anno:</strong> ${vehicle.year}</li>
-        `;
-        modalRating.innerHTML = generateStars(vehicle.rating);
-        modalCalculatedPrice.textContent = `Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}`;
+            // Apertura della modale contatti tramite link di navigazione e bottone hero
+            if (DOM.contactNavLink) {
+                DOM.contactNavLink.addEventListener('click', (e) => {
+                    e.preventDefault(); // Previene il comportamento di default del link
+                    if (DOM.contactModal) {
+                        DOM.contactModal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        DOM.contactModal.focus(); // Sposta il focus sulla modale
+                    }
+                });
+            }
+            if (DOM.heroContactBtn) {
+                DOM.heroContactBtn.addEventListener('click', () => {
+                    if (DOM.contactModal) {
+                        DOM.contactModal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        DOM.contactModal.focus(); // Sposta il focus sulla modale
+                    }
+                });
+            }
 
-        thumbnailGallery.innerHTML = '';
-        vehicle.images.forEach((image, index) => {
-            const thumb = document.createElement('img');
-            thumb.src = image;
-            thumb.alt = `Miniatura ${index + 1} di ${vehicle.name}`;
-            thumb.classList.add('thumbnail');
-            if (index === 0) { thumb.classList.add('active'); }
-            thumb.addEventListener('click', () => {
-                modalImg.src = image;
-                document.querySelectorAll('.thumbnail-gallery img').forEach(t => t.classList.remove('active'));
-                thumb.classList.add('active');
+            // Imposta il link di WhatsApp per la prenotazione (nella modale contatti)
+            if (DOM.bookNowWhatsappBtn) {
+                DOM.bookNowWhatsappBtn.href = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=Ciao%2C%20vorrei%20procedere%20con%20una%20prenotazione.`;
+            }
+
+            // Gestione FAQ (Accordion)
+            DOM.faqQuestions.forEach(question => {
+                question.addEventListener('click', () => toggleFaqItem(question));
+                question.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault(); // Previene lo scroll della pagina con Space
+                        toggleFaqItem(question);
+                    }
+                });
             });
-            thumbnailGallery.appendChild(thumb);
-        });
 
-        const whatsappMessage = encodeURIComponent(`Ciao, vorrei info su ${vehicle.name} (ID: ${vehicle.id}).`);
-        infoWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
-
-        vehicleModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(modalElement) {
-        modalElement.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-pressed', 'false');
+            // Funzione per gestire l'effetto sticky dell'header allo scroll
+            window.addEventListener('scroll', () => {
+                if (DOM.header) {
+                    if (window.scrollY > 50) {
+                        DOM.header.classList.add('scrolled');
+                    } else {
+                        DOM.header.classList.remove('scrolled');
+                    }
+                }
             });
-            btn.classList.add('active');
-            btn.setAttribute('aria-pressed', 'true');
-            currentFilter = btn.dataset.filter;
-            displayVehicles(currentFilter);
-        });
-    });
 
-    closeVehicleModalBtn.addEventListener('click', () => closeModal(vehicleModal));
-    closeContactModalBtn.addEventListener('click', () => closeModal(contactModal));
+            // Scroll fluido per i link di navigazione interni (hash links)
+            DOM.navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); // Previene il salto istantaneo
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Offset per l'header sticky, se necessario
+                        const offset = DOM.header ? DOM.header.offsetHeight : 0;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({
+                            top: elementPosition - offset - 10, // Piccolo aggiustamento per padding
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
 
-    vehicleModal.addEventListener('click', (e) => { if (e.target === vehicleModal) closeModal(vehicleModal); });
-    contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeModal(contactModal); });
+            // Gestisce l'apertura della modale contatti se si arriva tramite un hash URL (#contact)
+            window.addEventListener('hashchange', handleContactModalHash);
+            // Esegui al caricamento iniziale della pagina
+            handleContactModalHash();
+        }
 
-    contactNavLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        contactModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
+        /**
+         * Funzione ausiliaria per la gestione dell'accordion delle FAQ.
+         * @param {HTMLElement} questionElement - L'elemento della domanda FAQ cliccata/attivata.
+         */
+        function toggleFaqItem(questionElement) {
+            const answer = questionElement.nextElementSibling; // L'elemento della risposta è quello successivo
+            const isExpanded = questionElement.classList.contains('active');
 
-    heroContactBtn.addEventListener('click', () => {
-        contactModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-
-    bookNowWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=Ciao%2C%20vorrei%20procedere%20con%20una%20prenotazione.`;
-
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            faqQuestions.forEach(otherQuestion => {
-                if (otherQuestion !== question && otherQuestion.classList.contains('active')) {
+            // Chiude tutte le altre FAQ aperte
+            DOM.faqQuestions.forEach(otherQuestion => {
+                if (otherQuestion !== questionElement && otherQuestion.classList.contains('active')) {
                     otherQuestion.classList.remove('active');
+                    otherQuestion.setAttribute('aria-expanded', 'false');
                     otherQuestion.nextElementSibling.classList.remove('active');
                 }
             });
-            question.classList.toggle('active');
+
+            // Apre o chiude la FAQ cliccata
+            questionElement.classList.toggle('active');
+            questionElement.setAttribute('aria-expanded', !isExpanded); // Aggiorna lo stato ARIA
             answer.classList.toggle('active');
-        });
-    });
-
-    // Funzione per gestire lo scroll dell'header
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) { // Aggiunge la classe 'scrolled' dopo 50px di scroll
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
         }
-    });
 
-    // Per lo scroll alla sezione "Catalogo"
-    document.querySelector('nav a[href="#catalogo"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    });
+        /**
+         * Controlla l'hash URL e apre/chiude la modale contatti di conseguenza.
+         */
+        function handleContactModalHash() {
+            if (window.location.hash === '#contact' && DOM.contactModal) {
+                DOM.contactModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                DOM.contactModal.focus(); // Assicura che la modale riceva il focus
+            } else if (window.location.hash !== '#contact' && DOM.contactModal?.classList.contains('active')) {
+                // Se l'hash cambia e non è '#contact' e la modale è aperta, chiudila
+                closeModal(DOM.contactModal);
+            }
+        }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        displayVehicles();
-    });
-</script>
-
+        // Inizializzazione di tutte le funzionalità quando il DOM è completamente caricato
+        document.addEventListener('DOMContentLoaded', () => {
+            displayVehicles(currentVehicleFilter); // Mostra tutti i veicoli all'avvio
+            initializeEventListeners(); // Imposta tutti gli event listener
+        });
+        /* --- JAVASCRIPT FINISCE QUI --- */
+    </script>
+    
 </body>
 </html>

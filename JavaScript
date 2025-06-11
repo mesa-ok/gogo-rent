@@ -1,0 +1,355 @@
+// Dati dei veicoli: un array di oggetti per una gestione più organizzata dei dati
+const vehicles = [
+    {
+        id: 1,
+        type: 'auto',
+        name: 'Ford Panda',
+        fuel: 'Benzina',
+        km: 45000,
+        desc: 'Auto compatta e affidabile, ideale per la città e i brevi spostamenti. Facile da parcheggiare.',
+        transmission: 'Manuale',
+        year: 2015,
+        images: [
+            'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80',
+            'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=320&q=80'
+        ],
+        dailyRate: 35,
+        rating: 4
+    },
+    {
+        id: 2,
+        type: 'auto',
+        name: 'Audi A4',
+        fuel: 'Diesel',
+        km: 89000,
+        desc: 'Auto elegante e spaziosa con prestazioni elevate, perfetta per lunghi viaggi e comfort.',
+        transmission: 'Automatico',
+        year: 2017,
+        images: [
+            'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=320&q=80',
+            'https://images.unsplash.com/photo-1511910849309-86dbaee72b39?auto=format&fit=crop&w=320&q=80'
+        ],
+        dailyRate: 70,
+        rating: 5
+    },
+    {
+        id: 3,
+        type: 'scooter',
+        name: 'Piaggio Liberty',
+        fuel: 'Benzina',
+        km: 12000,
+        desc: 'Scooter pratico e maneggevole, ottimo per muoversi agilmente nel traffico cittadino.',
+        transmission: 'Automatico',
+        year: 2019,
+        images: [
+            'https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=320&q=80',
+            'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=320&q=80'
+        ],
+        dailyRate: 20,
+        rating: 3
+    },
+    {
+        id: 4,
+        type: 'auto',
+        name: 'Ford Focus',
+        fuel: 'Benzina',
+        km: 60000,
+        desc: 'Auto versatile e confortevole, ideale per la famiglia e adatta sia alla città che alle gite fuori porta.',
+        transmission: 'Manuale',
+        year: 2018,
+        images: [
+            'https://images.unsplash.com/photo-1486308510493-cb33e52e9e56?auto=format&fit=crop&w=320&q=80',
+            'https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&fit=crop&w=320&q=80'
+        ],
+        dailyRate: 45,
+        rating: 4
+    },
+    {
+        id: 5,
+        type: 'scooter',
+        name: 'Yamaha NMAX',
+        fuel: 'Benzina',
+        km: 15000,
+        desc: 'Scooter moderno con ottima autonomia e comfort, perfetto per gli spostamenti quotidiani e brevi tragitti.',
+        transmission: 'Automatico',
+        year: 2020,
+        images: [
+            'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=320&q=80',
+            'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80'
+        ],
+        dailyRate: 25,
+        rating: 5
+    }
+];
+
+// Riferimenti agli elementi DOM (Document Object Model)
+const DOM = {
+    grid: document.getElementById('vehicleGrid'),
+    filterBtns: document.querySelectorAll('.filter-btn'),
+    vehicleModal: document.getElementById('vehicleModal'),
+    modalImg: document.getElementById('modalImg'),
+    modalTitle: document.getElementById('modalTitle'),
+    modalDesc: document.getElementById('modalDesc'),
+    thumbnailGallery: document.getElementById('thumbnailGallery'),
+    closeVehicleModalBtn: document.getElementById('vehicleModal')?.querySelector('.close-btn'),
+    modalRating: document.getElementById('modalRating'),
+    modalCalculatedPrice: document.getElementById('modalCalculatedPrice'),
+    infoWhatsappBtn: document.getElementById('infoWhatsappBtn'),
+    contactNavLink: document.getElementById('contactNavLink'),
+    heroContactBtn: document.getElementById('heroContactBtn'),
+    contactModal: document.getElementById('contactModal'),
+    closeContactModalBtn: document.getElementById('contactModal')?.querySelector('.close-btn'),
+    bookNowWhatsappBtn: document.getElementById('bookNowWhatsappBtn'),
+    faqQuestions: document.querySelectorAll('.faq-question'),
+    header: document.querySelector('header'),
+    navLinks: document.querySelectorAll('nav a[href^="#"]')
+};
+
+const WHATSAPP_PHONE_NUMBER = '393517223520';
+let currentVehicleFilter = 'all'; // Stato del filtro attuale
+
+/**
+ * Genera il markup HTML per le stelle di valutazione.
+ * @param {number} rating - La valutazione da 1 a 5.
+ * @returns {string} - Il markup HTML delle stelle.
+ */
+function generateStarsHtml(rating) {
+    let starsHtml = '';
+    for (let i = 1; i <= 5; i++) {
+        // Aggiunge la classe 'empty' se la stella non è "piena"
+        starsHtml += `<svg class="star ${i <= rating ? '' : 'empty'}" viewBox="0 0 24 24"><path d="M12 .587l3.694 7.568 8.306 1.206-6.002 5.856 1.416 8.272-7.414-3.89-7.414 3.89 1.416-8.272-6.002-5.856 8.306-1.206z"/></svg>`;
+    }
+    return starsHtml;
+}
+
+/**
+ * Visualizza i veicoli nel catalogo in base al filtro corrente.
+ * @param {string} filter - Il tipo di veicolo da filtrare ('all', 'auto', 'scooter').
+ */
+function displayVehicles(filter = 'all') {
+    if (!DOM.grid) return; // Esce se l'elemento della griglia non esiste
+
+    DOM.grid.innerHTML = ''; // Pulisce la griglia esistente
+    const filteredVehicles = (filter !== 'all') ? vehicles.filter(v => v.type === filter) : vehicles;
+
+    if (filteredVehicles.length === 0) {
+        DOM.grid.innerHTML = `<p style="grid-column: 1 / -1; text-align:center; padding: 2rem 0;">Nessun veicolo trovato per questo filtro.</p>`;
+        return;
+    }
+
+    filteredVehicles.forEach(vehicle => {
+        const card = document.createElement('article');
+        card.className = `card`;
+        card.setAttribute('tabindex', '0'); // Rende la card accessibile con tastiera
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `${vehicle.name}, clicca per dettagli`);
+
+        card.innerHTML = `
+            <img src="${vehicle.images[0]}" alt="${vehicle.name}" />
+            <h3>${vehicle.name}</h3>
+            <p class="price">Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}</p>
+            <div class="star-rating" aria-label="Valutazione: ${vehicle.rating} su 5 stelle">
+                ${generateStarsHtml(vehicle.rating)}
+            </div>
+            <ul>
+                <li><strong>Alimentazione:</strong> ${vehicle.fuel}</li>
+                <li><strong>Chilometri:</strong> ${vehicle.km.toLocaleString('it-IT')} km</li>
+                <li><strong>Anno:</strong> ${vehicle.year}</li>
+                <li><strong>Trasmissione:</strong> ${vehicle.transmission}</li>
+            </ul>
+        `;
+        // Gestione click e tastiera per aprire la modale del veicolo
+        card.addEventListener('click', () => openVehicleModal(vehicle));
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                openVehicleModal(vehicle);
+            }
+        });
+        DOM.grid.appendChild(card);
+    });
+}
+
+/**
+ * Apre la modale con i dettagli di un veicolo specifico.
+ * @param {object} vehicle - L'oggetto veicolo da visualizzare.
+ */
+function openVehicleModal(vehicle) {
+    if (!DOM.vehicleModal) return;
+
+    DOM.modalImg.src = vehicle.images[0];
+    DOM.modalImg.alt = vehicle.name;
+    DOM.modalTitle.textContent = vehicle.name;
+    DOM.modalDesc.innerHTML = `
+        <li><strong>Descrizione:</strong> ${vehicle.desc}</li>
+        <li><strong>Alimentazione:</strong> ${vehicle.fuel}</li>
+        <li><strong>Chilometri:</strong> ${vehicle.km.toLocaleString('it-IT')} km</li>
+        <li><strong>Trasmissione:</strong> ${vehicle.transmission}</li>
+        <li><strong>Anno:</strong> ${vehicle.year}</li>
+    `;
+    DOM.modalRating.innerHTML = generateStarsHtml(vehicle.rating);
+    DOM.modalCalculatedPrice.textContent = `Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}`;
+
+    // Popola la galleria delle miniature
+    DOM.thumbnailGallery.innerHTML = '';
+    vehicle.images.forEach((image, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = image;
+        thumb.alt = `Miniatura ${index + 1} di ${vehicle.name}`;
+        thumb.classList.add('thumbnail');
+        if (index === 0) { thumb.classList.add('active'); } // La prima miniatura è attiva di default
+        thumb.addEventListener('click', () => {
+            DOM.modalImg.src = image; // Cambia l'immagine principale
+            document.querySelectorAll('.thumbnail-gallery img').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active'); // Attiva la miniatura selezionata
+        });
+        DOM.thumbnailGallery.appendChild(thumb);
+    });
+
+    const whatsappMessage = encodeURIComponent(`Ciao, vorrei più informazioni su ${vehicle.name} (ID: ${vehicle.id}).`);
+    DOM.infoWhatsappBtn.href = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${whatsappMessage}`;
+
+    DOM.vehicleModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Impedisce lo scroll del body quando la modale è aperta
+}
+
+/**
+ * Chiude una modale specifica.
+ * @param {HTMLElement} modalElement - L'elemento della modale da chiudere.
+ */
+function closeModal(modalElement) {
+    if (!modalElement) return;
+    modalElement.classList.remove('active');
+    document.body.style.overflow = ''; // Ripristina lo scroll del body
+}
+
+/**
+ * Inizializza tutti gli event listener per la pagina.
+ */
+function initializeEventListeners() {
+    // Event listener per i pulsanti di filtro del catalogo
+    DOM.filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Rimuove la classe 'active' da tutti i pulsanti e la aggiunge a quello cliccato
+            DOM.filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
+            currentVehicleFilter = btn.dataset.filter;
+            displayVehicles(currentVehicleFilter); // Aggiorna la visualizzazione dei veicoli
+        });
+    });
+
+    // Event listener per la chiusura delle modali
+    if (DOM.closeVehicleModalBtn) {
+        DOM.closeVehicleModalBtn.addEventListener('click', () => closeModal(DOM.vehicleModal));
+    }
+    if (DOM.closeContactModalBtn) {
+        DOM.closeContactModalBtn.addEventListener('click', () => closeModal(DOM.contactModal));
+    }
+
+    // Chiude le modali cliccando fuori dal contenuto
+    if (DOM.vehicleModal) {
+        DOM.vehicleModal.addEventListener('click', (e) => {
+            if (e.target === DOM.vehicleModal) closeModal(DOM.vehicleModal);
+        });
+    }
+    if (DOM.contactModal) {
+        DOM.contactModal.addEventListener('click', (e) => {
+            if (e.target === DOM.contactModal) closeModal(DOM.contactModal);
+        });
+    }
+
+    // Apertura della modale contatti tramite link di navigazione e bottone hero
+    if (DOM.contactNavLink) {
+        DOM.contactNavLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Previene il comportamento di default del link
+            if (DOM.contactModal) {
+                DOM.contactModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+    if (DOM.heroContactBtn) {
+        DOM.heroContactBtn.addEventListener('click', () => {
+            if (DOM.contactModal) {
+                DOM.contactModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+
+    // Imposta il link di WhatsApp per la prenotazione (nella modale contatti)
+    if (DOM.bookNowWhatsappBtn) {
+        DOM.bookNowWhatsappBtn.href = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=Ciao%2C%20vorrei%20procedere%20con%20una%20prenotazione.`;
+    }
+
+    // Gestione FAQ (Accordion)
+    DOM.faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling; // L'elemento della risposta è quello successivo al click
+            // Chiude tutte le altre FAQ aperte
+            DOM.faqQuestions.forEach(otherQuestion => {
+                if (otherQuestion !== question && otherQuestion.classList.contains('active')) {
+                    otherQuestion.classList.remove('active');
+                    otherQuestion.nextElementSibling.classList.remove('active');
+                }
+            });
+            // Apre o chiude la FAQ cliccata
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+        });
+    });
+
+    // Funzione per gestire l'effetto sticky dell'header allo scroll
+    window.addEventListener('scroll', () => {
+        if (DOM.header) {
+            if (window.scrollY > 50) {
+                DOM.header.classList.add('scrolled');
+            } else {
+                DOM.header.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Scroll fluido per i link di navigazione interni (hash links)
+    DOM.navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // Previene il salto istantaneo
+            const targetId = this.getAttribute('href');
+            // Gestisce il caso speciale del link '#home' che potrebbe puntare alla sezione hero
+            const targetElement = (targetId === '#home') ? DOM.header.nextElementSibling : document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start' // Scrolla all'inizio dell'elemento
+                });
+            }
+        });
+    });
+
+    // Gestisce l'apertura della modale contatti se si arriva tramite un hash URL (#contact)
+    window.addEventListener('hashchange', handleContactModalHash);
+    // Esegui al caricamento iniziale della pagina
+    handleContactModalHash();
+}
+
+/**
+ * Controlla l'hash URL e apre/chiude la modale contatti di conseguenza.
+ */
+function handleContactModalHash() {
+    if (window.location.hash === '#contact' && DOM.contactModal) {
+        DOM.contactModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    } else if (window.location.hash !== '#contact' && DOM.contactModal?.classList.contains('active')) {
+        // Se l'hash cambia e non è '#contact' e la modale è aperta, chiudila
+        closeModal(DOM.contactModal);
+    }
+}
+
+// Inizializzazione di tutte le funzionalità quando il DOM è completamente caricato
+document.addEventListener('DOMContentLoaded', () => {
+    displayVehicles(currentVehicleFilter); // Mostra tutti i veicoli all'avvio
+    initializeEventListeners(); // Imposta tutti gli event listener
+});
