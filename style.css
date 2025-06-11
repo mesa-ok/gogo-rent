@@ -1,134 +1,468 @@
 :root {
-  --primary: #003366;
-  --accent: #ff6b6b;
-  --bg: #f5f5f5;
-  --white: #ffffff;
-  --text: #333;
+    --primary: #004080;
+    --accent: #ff7b00;
+    --bg: #f9f9f9;
+    --text: #222;
+    --white: #fff;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --star-gold: #FFD700;
+    --star-grey: #ccc;
 }
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: clamp(1rem, 0.9vw + 0.5rem, 1.1rem); /* Dynamic font size */
 }
-
 .container {
-  width: 90%;
-  max-width: 1000px;
-  margin: auto;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 0 1rem; /* Added horizontal padding for smaller screens */
 }
 
 header {
-  background: var(--primary);
-  color: var(--white);
-  padding: 1rem 0;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.8rem 0; /* Slightly reduced padding */
+    box-shadow: 0 2px 8px var(--shadow);
 }
-
 header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
 }
-
+header h1 {
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Dynamic font size for logo */
+    margin-right: 1rem; /* Space between logo and nav */
+}
+nav {
+    flex-grow: 1; /* Allow nav to take available space */
+    display: flex;
+    justify-content: flex-end; /* Align links to the right */
+    flex-wrap: wrap; /* Allow links to wrap */
+}
 nav a {
-  margin-left: 1rem;
-  color: var(--white);
-  text-decoration: none;
-  font-weight: bold;
+    color: var(--white);
+    margin-left: 1.2rem; /* Slightly reduced margin */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 1.5vw, 1rem); /* Dynamic font size */
+    transition: text-decoration 0.3s ease;
+    padding: 0.2rem 0; /* Add some vertical padding for touch target */
 }
+nav a:hover { text-decoration: underline; }
 
 .hero {
-  background: url('https://source.unsplash.com/1600x500/?car,rental') no-repeat center;
-  background-size: cover;
-  padding: 5rem 1rem;
-  color: var(--white);
-  text-align: center;
+    background: url('https://www.autosinistrate.com/wp-content/uploads/2019/02/gamma-auto-noleggio-.jpg') no-repeat center/cover;
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 1rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+.hero h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem); /* Dynamic font size */
+    margin-bottom: 0.5rem;
+}
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem); /* Dynamic font size */
+    margin-bottom: 1rem; /* Slightly reduced margin */
+}
+.hero .btn {
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.7rem 1.8rem; /* Slightly reduced padding */
+    border-radius: 8px;
+    font-weight: 700;
+    box-shadow: 0 3px 10px var(--shadow);
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    border: none;
+    margin-top: 0.5rem;
+    font-size: clamp(0.9rem, 2vw, 1rem); /* Dynamic font size */
+}
+.hero .btn:hover { background: #e66b00; transform: translateY(-2px); }
+
+.catalogo { padding: 2rem 0; } /* Reduced padding */
+.catalogo h2 {
+    text-align: center;
+    margin-bottom: 1.2rem; /* Reduced margin */
+    font-weight: 700;
+    color: var(--primary);
+    font-size: clamp(1.8rem, 4vw, 2.2rem); /* Dynamic font size */
+}
+.filter-group {
+    max-width: 480px;
+    margin: 0 auto 1.5rem; /* Reduced margin */
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem; /* Reduced gap */
+    flex-wrap: wrap;
+}
+.filter-btn {
+    background: var(--white);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.4rem 0.8rem; /* Reduced padding */
+    border-radius: 10px; /* Slightly reduced border-radius */
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1 1 100px;
+    text-align: center;
+    user-select: none;
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem); /* Dynamic font size */
+}
+.filter-btn.active, .filter-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(0,64,128,0.4);
 }
 
-.btn {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--white);
-  padding: 0.7rem 1.4rem;
-  border-radius: 5px;
-  margin-top: 1rem;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Min card width slightly reduced */
+    gap: 1.5rem; /* Reduced gap */
 }
-.btn:hover {
-  background: #e24b4b;
-}
-
-.catalogo, .contatti {
-  padding: 4rem 1rem;
-}
-
 .card {
-  background: var(--white);
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: var(--white);
+    border-radius: 10px; /* Slightly reduced border-radius */
+    overflow: hidden;
+    box-shadow: 0 6px 12px var(--shadow); /* Reduced shadow */
+    padding-bottom: 0.8rem; /* Reduced padding */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
 }
-
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--shadow); }
 .card img {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: 160px; /* Slightly reduced image height */
+    object-fit: cover;
+    border-bottom: 2px solid var(--accent);
 }
-
-.card-info {
-  padding: 1.2rem;
+.card h3 {
+    margin: 0.8rem 0.8rem 0.2rem; /* Reduced margins */
+    font-weight: 700;
+    color: var(--primary);
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* Dynamic font size */
 }
-
-.card-info h3 {
-  margin-bottom: 0.5rem;
+.price {
+    margin: 0 0.8rem 0.4rem; /* Reduced margins */
+    font-weight: 700;
+    color: var(--accent);
+    font-size: clamp(1rem, 2.2vw, 1.1rem); /* Dynamic font size */
 }
-
-.card-info ul {
-  padding-left: 1.2rem;
-  margin: 1rem 0;
+.card ul {
+    margin: 0 1.2rem 0.8rem; /* Reduced margins */
+    list-style: none;
+    padding: 0;
+    font-size: clamp(0.8rem, 1.7vw, 0.9rem); /* Dynamic font size */
+    color: #555;
+    flex-grow: 1;
 }
-
-.contatti form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.star-rating {
+    margin: 0 0.8rem 0.4rem; /* Reduced margins */
+    display: flex;
+    align-items: center;
+    gap: 1px; /* Reduced gap */
 }
-
-.contatti input,
-.contatti textarea {
-  padding: 0.8rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.contatti button {
-  background: var(--primary);
-  color: var(--white);
-  padding: 1rem;
-  border: none;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
+.star { width: 18px; height: 18px; fill: var(--star-gold); } /* Reduced star size */
+.star.empty { fill: var(--star-grey); }
 
 footer {
-  background: var(--primary);
-  color: var(--white);
-  text-align: center;
-  padding: 2rem 1rem;
+    background: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem 1rem; /* Reduced padding */
+    margin-top: 2rem; /* Reduced margin */
+    font-size: 0.85rem; /* Slightly smaller font */
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .card-info ul {
-    padding-left: 1rem;
-  }
+/* MODAL STYLES - AGGIORNATI PER MOBILE */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 0.5rem; /* Ridotto il padding esterno del modal per schermi molto piccoli */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    overflow-y: auto; /* Permette lo scroll se il contenuto del modal è troppo lungo */
+    -webkit-overflow-scrolling: touch; /* Migliora lo scroll su iOS */
+}
+.modal.active { display: flex; opacity: 1; visibility: visible; }
+.modal-content {
+    background: var(--white);
+    border-radius: 12px;
+    max-width: 95%; /* Ora occupa quasi tutta la larghezza dello schermo */
+    width: 100%;
+    /* Rimosso max-width fisso come 420px qui, lo gestiremo in media query */
+    padding: 1rem; /* Ridotto il padding interno */
+    box-shadow: 0 6px 16px var(--shadow);
+    position: relative;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    max-height: 95vh; /* Assicura che il modal non sia più alto della viewport */
+    overflow-y: auto; /* Permette lo scroll all'interno del contenuto del modal */
+}
+.modal.active .modal-content { transform: translateY(0); }
 
-  .hero h2 {
-    font-size: 1.6rem;
-  }
+.modal-content img#modalImg {
+    width: 100%;
+    height: 180px; /* Altezza fissa ma ottimizzata per mobile */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+}
+.modal-content h3 {
+    margin-bottom: 0.4rem;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 4.5vw, 1.8rem); /* Font size più adattivo */
+}
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0;
+    color: #444;
+    text-align: left;
+    font-size: clamp(0.9rem, 2.5vw, 1rem); /* Font size più adattivo */
+}
+.modal-content ul li { margin-bottom: 0.6rem; }
+.modal-content .modal-price {
+    font-size: clamp(1.3rem, 4vw, 1.6rem); /* Font size più adattivo */
+    color: var(--primary);
+    font-weight: 800;
+    margin-top: 0.8rem;
+}
+.modal-content .btn-info-whatsapp {
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 3px 10px var(--shadow);
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1.2rem;
+    width: calc(100% - 2rem);
+    max-width: 280px; /* Aumentato leggermente per i pulsanti, ma rimane compatto */
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem); /* Font size più adattivo */
+}
+.modal-content .btn-info-whatsapp:hover { background: #003366; transform: translateY(-2px); }
+.close-btn {
+    position: absolute;
+    top: 8px; /* Avvicinato al bordo */
+    right: 8px; /* Avvicinato al bordo */
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 24px; /* Dimensioni più piccole */
+    height: 24px; /* Dimensioni più piccole */
+    font-weight: 700;
+    font-size: 1rem; /* Font size più piccolo */
+    cursor: pointer;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: background 0.3s ease;
+}
+.close-btn:hover { background: #e66b00; }
+
+.thumbnail-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem; /* Ridotto ulteriormente il gap tra le miniature */
+    margin-top: 0.6rem; /* Ridotto il margine superiore */
+    flex-wrap: wrap;
+}
+.thumbnail-gallery img {
+    width: 45px; /* Dimensioni miniature ancora più piccole */
+    height: 30px; /* Dimensioni miniature ancora più piccole */
+    object-fit: cover;
+    border-radius: 5px; /* Bordi più piccoli */
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease, transform 0.2s ease;
+}
+.thumbnail-gallery img.active { border-color: var(--accent); transform: scale(1.05); }
+.thumbnail-gallery img:hover { border-color: var(--primary); transform: scale(1.03); }
+
+/* Contact Modal specific styles (similar adjustments) */
+#contactModal .modal-content { text-align: center; }
+#contactModal h3 {
+    margin-bottom: 0.8rem;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+}
+#contactModal p {
+    margin-bottom: 1.2rem;
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    color: #444;
+}
+#contactModal .phone-number {
+    font-size: clamp(1.3rem, 3.5vw, 1.6rem);
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    display: block;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+#contactModal .phone-number:hover { color: var(--accent); }
+#contactModal .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Reduced gap */
+    margin-top: 1.2rem; /* Reduced margin */
+    border-top: 1px solid #eee;
+    padding-top: 1.2rem;
+}
+#contactModal .modal-buttons .btn {
+    width: 100%;
+    padding: 0.75rem 1rem; /* Reduced padding */
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+#contactModal .modal-buttons .btn-primary { background: var(--primary); color: var(--white); border: none; }
+#contactModal .modal-buttons .btn-primary:hover { background: #003366; transform: translateY(-2px); }
+#contactModal .modal-buttons .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
+#contactModal .modal-buttons .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); border-color: var(--primary); }
+#contactModal .modal-buttons .btn-whatsapp { background: #25D366; color: var(--white); border: none; }
+#contactModal .modal-buttons .btn-whatsapp:hover { background: #1DA851; transform: translateY(-2px); }
+
+.faq-section { margin-top: 1.2rem; text-align: left; border-top: 1px solid #eee; padding-top: 1.2rem; }
+.faq-section h4 {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+    text-align: center;
+}
+.faq-item {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.faq-question {
+    background: #f0f8ff;
+    padding: 0.7rem 0.9rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: clamp(0.9rem, 1.9vw, 1rem);
+}
+.faq-question:hover { background: #e0f0ff; }
+.faq-question .arrow { font-size: 1.1rem; transition: transform 0.3s ease; }
+.faq-question.active .arrow { transform: rotate(90deg); }
+.faq-answer {
+    padding: 0 0.9rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    color: #555;
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+}
+.faq-answer p { padding-bottom: 0.7rem; }
+.faq-answer.active { max-height: 200px; padding: 0.7rem 0.9rem; }
+
+
+/* Media Queries - Specific adjustments for larger screens (600px and up) */
+@media (min-width: 600px) {
+    .hero .btn:not(:last-child) { margin-right: 1rem; }
+    #contactModal .modal-buttons { flex-direction: row; justify-content: center; }
+    #contactModal .modal-buttons .btn { width: auto; min-width: 180px; }
+    /* Reimposta la larghezza massima del modal-content per schermi più grandi */
+    .modal-content {
+        max-width: 480px; /* Larghezza maggiore per schermi da tablet in su */
+        padding: 1.5rem; /* Padding standard */
+    }
+    .modal-content img#modalImg {
+        height: 260px; /* Altezza maggiore per l'immagine principale del modal */
+    }
+    .modal-content .btn-info-whatsapp {
+        max-width: 300px;
+    }
+    .close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 1.2rem;
+        top: 12px;
+        right: 12px;
+    }
+    .thumbnail-gallery img {
+        width: 60px;
+        height: 40px;
+    }
+}
+
+/* Only for very small screens (e.g., less than 400px), adjust navigation if needed */
+@media (max-width: 400px) {
+    header .container {
+        flex-direction: column; /* Stack logo and nav vertically */
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    nav {
+        width: 100%;
+        justify-content: space-around; /* Distribute links more evenly */
+        margin-top: 0.5rem;
+    }
+    nav a {
+        margin: 0 0.5rem; /* Reduced margins between links */
+        font-size: 0.8rem;
+    }
+    /* Ulteriori aggiustamenti per il modal su schermi molto stretti */
+    .modal-content {
+        padding: 0.8rem; /* Padding ancora più ridotto */
+    }
+    .modal-content img#modalImg {
+        height: 160px; /* Immagine più piccola per schermi minuscoli */
+    }
+    .modal-content h3 {
+        font-size: clamp(1.2rem, 4vw, 1.6rem);
+    }
+    .modal-content ul {
+        font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+    }
+    .modal-content .modal-price {
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+    }
 }

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gogo Rent - Catalogo Veicoli</title>
+    <title>Prenotazione - Gogo Rent</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Variabili CSS (essenziali per la coerenza dei colori e font) */
         :root {
             --primary: #004080; /* Blu scuro principale */
             --accent: #ff7b00;  /* Arancione brillante per accenti */
@@ -16,33 +17,32 @@
             --shadow: rgba(0, 0, 0, 0.1);
             --star-gold: #FFD700;
             --star-grey: #ccc;
-            /* Gradiente per la sottolineatura (NUOVO STILE) */
-            --gradient-underline: linear-gradient(to right, #ff7b00, #ffc107); /* Arancione a Giallo */
+            --gradient-underline: linear-gradient(to right, #ff7b00, #ffc107);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; }
         .container { width: 90%; max-width: 1000px; margin: auto; }
 
-        /* --- HEADER E NAVIGAZIONE --- */
+        /* HEADER E NAVIGAZIONE (COPIATI DALLA TUA PAGINA PRINCIPALE) */
         header {
             background: var(--primary);
             color: var(--white);
             padding: 1rem 0;
             box-shadow: 0 2px 8px var(--shadow);
-            position: sticky; /* Rende la barra di navigazione fissa */
+            position: sticky;
             top: 0;
             z-index: 100;
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-        header.scrolled { /* Classe aggiunta via JS allo scroll */
-            background: rgba(0, 64, 128, 0.95); /* Leggera trasparenza allo scroll */
+        header.scrolled {
+            background: rgba(0, 64, 128, 0.95);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
         }
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Permette al contenuto di andare a capo su schermi piccoli */
+            flex-wrap: wrap;
         }
         header h1 {
             font-size: 1.8rem;
@@ -52,106 +52,180 @@
         }
         nav {
             display: flex;
-            gap: 1.8rem; /* Spazio tra i link */
+            gap: 1.8rem;
             flex-wrap: wrap;
-            justify-content: flex-end; /* Allinea a destra per default */
+            justify-content: flex-end;
             flex-grow: 1;
         }
-        
-        /* --- STILE AGGIORNATO PER I BOTTONI DI NAVIGAZIONE --- */
         nav a {
             color: var(--white);
             text-decoration: none;
             font-weight: 600;
             font-size: 1.05rem;
             position: relative;
-            padding-bottom: 7px; /* Spazio per la sottolineatura più spessa */
+            padding-bottom: 7px;
             transition: color 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             white-space: nowrap;
         }
-
-        /* Effetto sottolineatura con gradiente */
         nav a::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 3px; /* Sottolineatura più spessa */
-            background: var(--gradient-underline); /* Gradiente di colore */
+            height: 3px;
+            background: var(--gradient-underline);
             left: 0;
             bottom: 0;
-            border-radius: 2px; /* Bordi leggermente arrotondati per la sottolineatura */
+            border-radius: 2px;
             transition: width 0.3s ease-out;
         }
-
-        /* Effetto al passaggio del mouse (hover) */
         nav a:hover {
-            color: #f0f0f0; /* Testo leggermente più luminoso */
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.4); /* Leggera luminescenza al testo */
+            color: #f0f0f0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
         }
         nav a:hover::after {
             width: 100%;
         }
-
-        /* Stile per le icone all'interno dei link */
         nav a .fas {
             font-size: 1.1rem;
             color: inherit;
             transition: color 0.3s ease;
         }
-
-        /* L'icona eredita il colore luminoso al hover */
         nav a:hover .fas {
              color: #f0f0f0; 
         }
 
-        /* --- MEDIA QUERIES PER HEADER E NAVIGAZIONE (adattamento responsivo) --- */
+        /* MEDIA QUERIES PER HEADER E NAVIGAZIONE */
         @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
-                align-items: center;
-            }
-            header h1 {
-                margin-bottom: 1rem;
-                margin-right: 0;
-            }
-            nav {
-                width: 100%;
-                justify-content: center;
-                gap: 1rem; /* Riduci il gap per schermi più piccoli */
-            }
-            nav a {
-                font-size: 0.95rem;
-                padding: 0 0.5rem 5px; /* Spazio per la sottolineatura più spesso */
-                gap: 0.3rem; /* Riduci lo spazio tra icona e testo su mobile */
-            }
+            header .container { flex-direction: column; align-items: center; }
+            header h1 { margin-bottom: 1rem; margin-right: 0; }
+            nav { width: 100%; justify-content: center; gap: 1rem; }
+            nav a { font-size: 0.95rem; padding: 0 0.5rem 5px; gap: 0.3rem; }
         }
         @media (max-width: 480px) {
-            nav {
-                flex-direction: column; /* Impila i link verticalmente su schermi molto piccoli */
-                gap: 0.8rem;
-            }
-            nav a {
-                padding: 0.2rem 0; /* Più padding verticale quando impilati */
-                justify-content: center; /* Centra anche le icone */
-            }
+            nav { flex-direction: column; gap: 0.8rem; }
+            nav a { padding: 0.2rem 0; justify-content: center; }
         }
 
-        /* --- RESTO DEL TUO CSS ORIGINALE (non modificato) --- */
-        .hero { background: url('https://www.autosinistrate.com/wp-content/uploads/2019/02/gamma-auto-noleggio-.jpg') no-repeat center/cover; color: var(--white); text-align: center; padding: 2rem 1rem; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 200px; }
-        .hero h2 { font-size: 2.4rem; margin-bottom: 0.5rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 1.5rem; }
-        .hero .btn { background: var(--accent); color: var(--white); padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease, transform 0.2s ease; cursor: pointer; border: none; margin-top: 0.5rem; }
-        .hero .btn:hover { background: #e66b00; transform: translateY(-2px); }
+        /* STILI SPECIFICI PER LA PAGINA DI PRENOTAZIONE */
+        .booking-section {
+            background: linear-gradient(135deg, #e0f2f7, #c1e4ee); /* Sfondo delicato */
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.05);
+            min-height: calc(100vh - 150px); /* Assicura un'altezza minima per la pagina */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .booking-section h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .booking-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: flex-end;
+            border: 1px solid #ddd;
+        }
+        .form-group {
+            flex: 1 1 calc(50% - 1.5rem); /* Due colonne su schermi grandi */
+            min-width: 250px; /* Larghezza minima per evitare che si schiacci */
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+        .form-group input[type="date"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            appearance: none; /* Rimuove lo stile predefinito per la data */
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        .form-group input[type="date"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 123, 0, 0.3);
+            outline: none;
+        }
+        .booking-form button {
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.9rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 123, 0, 0.4);
+            flex-shrink: 0; /* Non si rimpicciolisce */
+            margin-top: 1rem; /* Spazio per allineamento */
+        }
+        .booking-form button:hover {
+            background: #e66b00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 123, 0, 0.5);
+        }
 
-        .catalogo { padding: 3rem 0; }
-        .catalogo h2 { text-align: center; margin-bottom: 1.5rem; font-weight: 700; color: var(--primary); }
-        .filter-group { max-width: 480px; margin: 0 auto 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-        .filter-btn { background: var(--white); border: 2px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; flex: 1 1 100px; text-align: center; user-select: none; }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: var(--white); box-shadow: 0 4px 12px rgba(0,64,128,0.4); }
+        #availableVehiclesDisplay {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        #availableVehiclesDisplay h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        #availableVehiclesDisplay .grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Potrebbero essere un po' più stretti qui */
+            gap: 1.8rem;
+        }
+        #availableVehiclesDisplay .card {
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        #availableVehiclesDisplay .card .price {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-top: 0.5rem;
+        }
+        .no-vehicles-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+        }
 
+        /* CARD (necessarie per la visualizzazione dei veicoli disponibili) */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 16px var(--shadow); padding-bottom: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; cursor: pointer; position: relative; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px var(--shadow); }
@@ -163,14 +237,16 @@
         .star { width: 20px; height: 20px; fill: var(--star-gold); }
         .star.empty { fill: var(--star-grey); }
 
+        /* FOOTER (COPIATO DALLA TUA PAGINA PRINCIPALE) */
         footer { background: var(--primary); color: var(--white); text-align: center; padding: 2rem 1rem; margin-top: 3rem; }
 
+        /* MODALI (COPIATE DALLA TUA PAGINA PRINCIPALE) */
         .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 1rem; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal.active { display: flex; opacity: 1; visibility: visible; }
         .modal-content { 
             background: var(--white); 
             border-radius: 16px; 
-            max-width: 100px; 
+            max-width: 320px; 
             width: 100%; 
             padding: 1rem; 
             box-shadow: 0 8px 20px var(--shadow); 
@@ -178,20 +254,7 @@
             text-align: center; 
             transform: translateY(20px); 
             transition: transform 0.3s ease, opacity 0.3s ease; 
-        }/* --- RESTO DEL TUO CSS ORIGINALE (non modificato) --- */
-.hero {
-    background: url('https://www.autosinistrate.com/wp-content/uploads/2019/02/gamma-auto-noleggio-.jpg') no-repeat center/cover;
-    color: var(--white);
-    text-align: center;
-    padding: 2rem 1rem;
-    font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px; /* CAMBIA QUI: da 200px a 400px o più */
-}
+        }
         .modal.active .modal-content { transform: translateY(0); }
         .modal-content img#modalImg { 
             width: 100%; 
@@ -207,7 +270,7 @@
             font-size: 0.9rem; 
         }
         .modal-content .modal-price { font-size: 1.5rem; color: var(--primary); font-weight: 800; margin-top: 1rem; }
-        .modal-content .btn-info-whatsapp { background: var(--primary); color: var(--white); padding: 0.85rem 1.5rem; border-radius: 8px; font-weight: 600; border: none; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease, transform 0.2s ease; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 1.5rem; width: calc(100% - 2rem); max-width: 300px; }
+        .modal-content .btn-info-whatsapp { background: var(--primary); color: var(--white); padding: 0.85rem 1.5rem; border-radius: 8px; font-weight: 600; border: none; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 1.5rem; width: calc(100% - 2rem); max-width: 300px; }
         .modal-content .btn-info-whatsapp:hover { background: #003366; transform: translateY(-2px); }
         .close-btn { position: absolute; top: 12px; right: 12px; background: var(--accent); color: var(--white); border: none; border-radius: 50%; width: 28px; height: 28px; font-weight: 700; font-size: 1.2rem; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px var(--shadow); transition: background 0.3s ease; }
         .close-btn:hover { background: #e66b00; }
@@ -243,26 +306,27 @@
         .faq-answer.active { max-height: 200px; padding: 0.8rem 1rem; }
 
         @media (min-width: 600px) {
-            .hero .btn:not(:last-child) { margin-right: 1rem; }
             #contactModal .modal-buttons { flex-direction: row; justify-content: center; }
             #contactModal .modal-buttons .btn { width: auto; min-width: 180px; }
-            .modal-content {
-                max-width: 480px; 
-                padding: 1.5rem;
-            }
-            .modal-content img#modalImg {
-                height: 260px;
-            }
-            .modal-content ul li {
-                font-size: 1rem;
-            }
+            .modal-content { max-width: 480px; padding: 1.5rem; }
+            .modal-content img#modalImg { height: 260px; }
+            .modal-content ul li { font-size: 1rem; }
         }
         @media (max-width: 600px) {
             .hero { padding: 1.5rem 1rem; min-height: 180px; }
             .hero h2 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
             .grid { grid-template-columns: 1fr; }
-            /* Non toccato qui, gestito dalle media query della nav */
+        }
+        @media (max-width: 700px) {
+            .booking-form {
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+            .form-group {
+                flex: 1 1 100%; /* Una colonna su schermi piccoli */
+                min-width: unset;
+            }
         }
     </style>
 </head>
@@ -273,31 +337,39 @@
         <h1>Gogo Rent</h1>
         <nav>
             <a href="info.html"><i class="fas fa-info-circle"></i> Info</a>
-             <a href="prenotazione.html"><i class="fas fa-info-circle"></i> Prenotazione</a>
-            <a href="#"><i class="fas fa-home"></i> Home</a>
-            <a href="#catalogo"><i class="fas fa-car"></i> Catalogo</a> <a href="reviews.html"><i class="fas fa-star"></i> Cosa dicono di noi</a> 
+            <a href="index.html"><i class="fas fa-home"></i> Home</a> 
+            <a href="index.html#catalogo"><i class="fas fa-car"></i> Catalogo</a> 
+            <a href="reviews.html"><i class="fas fa-star"></i> Cosa dicono di noi</a> 
             <a href="#" id="contactNavLink"><i class="fas fa-headset"></i> Contatti</a>
         </nav>
     </div>
 </header>
 
-<section class="hero">
-    <h2>Scopri i nostri veicoli</h2>
-    <p>Auto e scooter selezionati con cura per te</p>
-    <button class="btn" id="heroContactBtn">Contattaci</button>
-</section>
+<main>
+    <section class="booking-section" id="bookingSection">
+        <div class="container">
+            <h2>Effettua la Tua Prenotazione</h2>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label for="pickupDate">Data Ritiro</label>
+                    <input type="date" id="pickupDate" required />
+                </div>
+                <div class="form-group">
+                    <label for="returnDate">Data Riconsegna</label>
+                    <input type="date" id="returnDate" required />
+                </div>
+                <button type="submit">Cerca Disponibilità</button>
+            </form>
 
-<section class="catalogo container" aria-label="Catalogo veicoli" id="catalogo">
-    <h2>Catalogo Veicoli</h2>
+            <div id="availableVehiclesDisplay">
+                </div>
+        </div>
+    </section>
+</main>
 
-    <div class="filter-group" role="group" aria-label="Filtra veicoli">
-        <button class="filter-btn active" data-filter="all" aria-pressed="true">Tutti</button>
-        <button class="filter-btn" data-filter="auto" aria-pressed="false">Auto</button>
-        <button class="filter-btn" data-filter="scooter" aria-pressed="false">Scooter</button>
-    </div>
-
-    <div class="grid" id="vehicleGrid" aria-live="polite"></div>
-</section>
+<footer>
+    <p>© 2025 Gogo Rent - Tutti i diritti riservati</p>
+</footer>
 
 <div class="modal" id="vehicleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
     <div class="modal-content">
@@ -347,21 +419,19 @@
     </div>
 </div>
 
-<footer>
-    <p>© 2025 Gogo Rent - Tutti i diritti riservati</p>
-</footer>
-
 <script>
+    // Dati dei veicoli (devono essere gli stessi della tua pagina principale)
     const vehicles = [
-        { id: 1, type: 'auto', name: 'Ford Panda', fuel: 'Benzina', km: 45000, desc: 'Auto compatta e affidabile per la città.', transmission: 'Manuale', year: 2015, images: ['https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=320&q=80'], dailyRate: 35, rating: 4 },
-        { id: 2, type: 'auto', name: 'Audi A4', fuel: 'Diesel', km: 89000, desc: 'Auto elegante con prestazioni elevate.', transmission: 'Automatico', year: 2017, images: ['https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1511910849309-86dbaee72b39?auto=format&fit=crop&w=320&q=80'], dailyRate: 70, rating: 5 },
-        { id: 3, type: 'scooter', name: 'Piaggio Liberty', fuel: 'Benzina', km: 12000, desc: 'Scooter pratico e maneggevole per gli spostamenti urbani.', transmission: 'Automatico', year: 2019, images: ['https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=320&q=80'], dailyRate: 20, rating: 3 },
-        { id: 4, type: 'auto', name: 'Ford Focus', fuel: 'Benzina', km: 60000, desc: 'Auto versatile ideale per la famiglia.', transmission: 'Manuale', year: 2018, images: ['https://images.unsplash.com/photo-1486308510493-cb33e52e9e56?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&fit=crop&w=320&q=80'], dailyRate: 45, rating: 4 },
-        { id: 5, type: 'scooter', name: 'Yamaha NMAX', fuel: 'Benzina', km: 15000, desc: 'Scooter moderno con ottima autonomia.', transmission: 'Automatico', year: 2020, images: ['https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80'], dailyRate: 25, rating: 5 }
+        { id: 1, type: 'auto', name: 'Ford Panda', fuel: 'Benzina', km: 45000, desc: 'Auto compatta e affidabile per la città.', transmission: 'Manuale', year: 2015, images: ['https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=320&q=80'], dailyRate: 35, rating: 4, bookedDates: ['2025-07-10', '2025-07-11', '2025-07-12'] },
+        { id: 2, type: 'auto', name: 'Audi A4', fuel: 'Diesel', km: 89000, desc: 'Auto elegante con prestazioni elevate.', transmission: 'Automatico', year: 2017, images: ['https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1511910849309-86dbaee72b39?auto=format&fit=crop&w=320&q=80'], dailyRate: 70, rating: 5, bookedDates: ['2025-07-15', '2025-07-16'] },
+        { id: 3, type: 'scooter', name: 'Piaggio Liberty', fuel: 'Benzina', km: 12000, desc: 'Scooter pratico e maneggevole per gli spostamenti urbani.', transmission: 'Automatico', year: 2019, images: ['https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=320&q=80'], dailyRate: 20, rating: 3, bookedDates: ['2025-07-20', '2025-07-21', '2025-07-22', '2025-07-23'] },
+        { id: 4, type: 'auto', name: 'Ford Focus', fuel: 'Benzina', km: 60000, desc: 'Auto versatile ideale per la famiglia.', transmission: 'Manuale', year: 2018, images: ['https://images.unsplash.com/photo-1486308510493-cb33e52e9e56?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1504595403659-9088ce801e29?auto=format&fit=crop&w=320&q=80'], dailyRate: 45, rating: 4, bookedDates: [] },
+        { id: 5, type: 'scooter', name: 'Yamaha NMAX', fuel: 'Benzina', km: 15000, desc: 'Scooter moderno con ottima autonomia.', transmission: 'Automatico', year: 2020, images: ['https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=320&q=80', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=320&q=80'], dailyRate: 25, rating: 5, bookedDates: ['2025-08-01', '2025-08-02'] }
     ];
 
-    const grid = document.getElementById('vehicleGrid');
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    const today = new Date();
+    const todayISO = today.toISOString().split('T')[0]; 
+
     const vehicleModal = document.getElementById('vehicleModal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
@@ -372,13 +442,66 @@
     const modalCalculatedPrice = document.getElementById('modalCalculatedPrice');
     const infoWhatsappBtn = document.getElementById('infoWhatsappBtn'); 
     const contactNavLink = document.getElementById('contactNavLink'); 
-    const heroContactBtn = document.getElementById('heroContactBtn'); 
     const contactModal = document.getElementById('contactModal');
     const closeContactModalBtn = contactModal.querySelector('.close-btn');
     const bookNowWhatsappBtn = document.getElementById('bookNowWhatsappBtn'); 
-    const phoneNumber = '393517223520'; 
+    const phoneNumber = '393517223520'; // Il tuo numero di telefono per WhatsApp
 
-    let currentFilter = 'all';
+    const bookingForm = document.getElementById('bookingForm');
+    const pickupDateInput = document.getElementById('pickupDate');
+    const returnDateInput = document.getElementById('returnDate');
+    const availableVehiclesDisplay = document.getElementById('availableVehiclesDisplay');
+
+    // Imposta la data minima per i campi data a oggi
+    pickupDateInput.min = todayISO;
+    returnDateInput.min = todayISO;
+
+    // Aggiorna la data minima del returnDate in base alla pickupDate
+    pickupDateInput.addEventListener('change', () => {
+        returnDateInput.min = pickupDateInput.value;
+        if (returnDateInput.value < pickupDateInput.value) {
+            returnDateInput.value = pickupDateInput.value;
+        }
+    });
+
+    bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const pickupDate = new Date(pickupDateInput.value);
+        const returnDate = new Date(returnDateInput.value);
+
+        if (pickupDate > returnDate) {
+            alert('La data di riconsegna non può essere precedente alla data di ritiro.');
+            return;
+        }
+
+        const timeDiff = returnDate.getTime() - pickupDate.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) +1 ; // +1 per includere anche il giorno di riconsegna
+
+        displayAvailableVehicles(pickupDate, returnDate, daysDiff);
+    });
+
+    function isVehicleAvailable(vehicle, pickupDate, returnDate) {
+        if (!vehicle.bookedDates || vehicle.bookedDates.length === 0) {
+            return true; // Se non ci sono date prenotate, il veicolo è sempre disponibile
+        }
+
+        const requestedStart = pickupDate.getTime();
+        const requestedEnd = returnDate.getTime();
+
+        for (const bookedDateStr of vehicle.bookedDates) {
+            const bookedDate = new Date(bookedDateStr);
+            const bookedStartTime = bookedDate.getTime();
+            const bookedEndTime = bookedDate.getTime(); 
+
+            // Controlla se c'è sovrapposizione
+            if (
+                (requestedStart <= bookedEndTime && requestedEnd >= bookedStartTime)
+            ) {
+                return false; 
+            }
+        }
+        return true; 
+    }
 
     function generateStars(rating) {
         let starsHtml = '';
@@ -388,26 +511,36 @@
         return starsHtml;
     }
 
-    function displayVehicles(filter = 'all') {
-        grid.innerHTML = '';
-        let filteredVehicles = (filter !== 'all') ? vehicles.filter(v => v.type === filter) : vehicles;
+    function displayAvailableVehicles(pickupDate, returnDate, daysDiff) {
+        availableVehiclesDisplay.innerHTML = '';
+        const availableGrid = document.createElement('div');
+        availableGrid.className = 'grid';
 
-        if (filteredVehicles.length === 0) {
-            grid.innerHTML = `<p style="grid-column: 1 / -1; text-align:center; padding: 2rem 0;">Nessun veicolo trovato.</p>`;
+        const foundVehicles = vehicles.filter(vehicle => 
+            isVehicleAvailable(vehicle, pickupDate, returnDate)
+        );
+
+        if (foundVehicles.length === 0) {
+            availableVehiclesDisplay.innerHTML = `<p class="no-vehicles-message">Nessun veicolo disponibile per le date selezionate. Prova con un altro periodo!</p>`;
             return;
         }
 
-        filteredVehicles.forEach(vehicle => {
+        availableVehiclesDisplay.innerHTML = '<h3>Veicoli Disponibili per il Tuo Periodo</h3>'; 
+        availableVehiclesDisplay.appendChild(availableGrid);
+
+        foundVehicles.forEach(vehicle => {
             const card = document.createElement('article');
             card.className = `card`;
             card.setAttribute('tabindex', '0');
             card.setAttribute('role', 'button');
-            card.setAttribute('aria-label', `${vehicle.name}, clicca per dettagli`);
+            card.setAttribute('aria-label', `${vehicle.name}, clicca per dettagli e prenotazione`);
+
+            const totalPrice = (vehicle.dailyRate * daysDiff).toLocaleString('it-IT');
 
             card.innerHTML = `
                 <img src="${vehicle.images[0]}" alt="${vehicle.name}" />
                 <h3>${vehicle.name}</h3>
-                <p class="price">Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}</p>
+                <p class="price">Prezzo Totale (${daysDiff} giorni): €${totalPrice}</p>
                 <div class="star-rating" aria-label="Valutazione: ${vehicle.rating} su 5 stelle">
                     ${generateStars(vehicle.rating)}
                 </div>
@@ -418,13 +551,22 @@
                     <li><strong>Trasmissione:</strong> ${vehicle.transmission}</li>
                 </ul>
             `;
-            card.addEventListener('click', () => openVehicleModal(vehicle));
+            card.addEventListener('click', () => {
+                openVehicleModal(vehicle); 
+                document.getElementById('modalCalculatedPrice').textContent = `Costo stimato per ${daysDiff} giorni: €${totalPrice}`;
+                
+                const whatsappMessage = encodeURIComponent(`Ciao, vorrei prenotare ${vehicle.name} dal ${pickupDateInput.value} al ${returnDateInput.value}. Costo stimato: €${totalPrice}.`);
+                document.getElementById('infoWhatsappBtn').href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+            });
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     openVehicleModal(vehicle);
+                    document.getElementById('modalCalculatedPrice').textContent = `Costo stimato per ${daysDiff} giorni: €${totalPrice}`;
+                     const whatsappMessage = encodeURIComponent(`Ciao, vorrei prenotare ${vehicle.name} dal ${pickupDateInput.value} al ${returnDateInput.value}. Costo stimato: €${totalPrice}.`);
+                    document.getElementById('infoWhatsappBtn').href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
                 }
             });
-            grid.appendChild(card);
+            availableGrid.appendChild(card);
         });
     }
 
@@ -440,7 +582,7 @@
             <li><strong>Anno:</strong> ${vehicle.year}</li>
         `;
         modalRating.innerHTML = generateStars(vehicle.rating);
-        modalCalculatedPrice.textContent = `Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}`;
+        modalCalculatedPrice.textContent = `Prezzo giornaliero: €${vehicle.dailyRate.toLocaleString('it-IT')}`; 
 
         thumbnailGallery.innerHTML = '';
         vehicle.images.forEach((image, index) => {
@@ -457,9 +599,12 @@
             thumbnailGallery.appendChild(thumb);
         });
 
-        const whatsappMessage = encodeURIComponent(`Ciao, vorrei info su ${vehicle.name} (ID: ${vehicle.id}).`);
-        infoWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
-
+        // Prepara il messaggio WhatsApp per la richiesta di info generiche (se le date non sono state selezionate)
+        if (!pickupDateInput.value || !returnDateInput.value) { 
+            const whatsappMessage = encodeURIComponent(`Ciao, vorrei info su ${vehicle.name} (ID: ${vehicle.id}).`);
+            infoWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+        }
+        
         vehicleModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -468,19 +613,6 @@
         modalElement.classList.remove('active');
         document.body.style.overflow = '';
     }
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-pressed', 'false');
-            });
-            btn.classList.add('active');
-            btn.setAttribute('aria-pressed', 'true');
-            currentFilter = btn.dataset.filter;
-            displayVehicles(currentFilter);
-        });
-    });
 
     closeVehicleModalBtn.addEventListener('click', () => closeModal(vehicleModal));
     closeContactModalBtn.addEventListener('click', () => closeModal(contactModal));
@@ -494,13 +626,10 @@
         document.body.style.overflow = 'hidden';
     });
 
-    heroContactBtn.addEventListener('click', () => {
-        contactModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-
+    // Link "Prenota Ora (WhatsApp)" nel modal contatti
     bookNowWhatsappBtn.href = `https://wa.me/${phoneNumber}?text=Ciao%2C%20vorrei%20procedere%20con%20una%20prenotazione.`;
 
+    // Funzionalità FAQ nel modal contatti
     const faqQuestions = document.querySelectorAll('.faq-question');
     faqQuestions.forEach(question => {
         question.addEventListener('click', () => {
@@ -516,24 +645,20 @@
         });
     });
 
-    // Funzione per gestire lo scroll dell'header
+    // Effetto scroll per l'header (se lo hai anche nella tua index.html)
     window.addEventListener('scroll', () => {
         const header = document.querySelector('header');
-        if (window.scrollY > 50) { // Aggiunge la classe 'scrolled' dopo 50px di scroll
+        if (window.scrollY > 50) { 
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
     });
 
-    // Per lo scroll alla sezione "Catalogo"
-    document.querySelector('nav a[href="#catalogo"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    });
-
+    // Inizializzazione date input
     document.addEventListener('DOMContentLoaded', () => {
-        displayVehicles();
+        pickupDateInput.min = todayISO;
+        returnDateInput.min = pickupDateInput.value || todayISO;
     });
 </script>
 
